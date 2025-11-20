@@ -354,9 +354,6 @@ function ModernPaymentCard({
 
             <div className="space-y-4">
               <div>
-                <p className="text-xs font-medium text-gray-600 mb-2">
-                  CARDHOLDER
-                </p>
                 <p className="text-sm font-semibold text-gray-900 tracking-wide">
                   {method.cardholderName.toUpperCase()}
                 </p>
@@ -364,9 +361,6 @@ function ModernPaymentCard({
 
               <div className="flex items-end justify-between">
                 <div className="flex-1">
-                  <p className="text-xs font-medium text-gray-600 mb-1">
-                    {isPayPal ? "EMAIL" : "CARD NUMBER"}
-                  </p>
                   <p className="text-lg font-mono font-bold text-gray-900 tracking-widest">
                     {isPayPal
                       ? method.cardNumber
@@ -375,9 +369,6 @@ function ModernPaymentCard({
                 </div>
                 {!isPayPal && (
                   <div className="text-right">
-                    <p className="text-xs font-medium text-gray-600 mb-1">
-                      VALID
-                    </p>
                     <p className="font-mono font-bold text-sm text-gray-900">
                       {method.expiryDate}
                     </p>
@@ -417,9 +408,6 @@ function ModernPaymentCard({
 
             <div className="space-y-4">
               <div>
-                <p className="text-xs font-medium text-gray-600 mb-2">
-                  CARDHOLDER
-                </p>
                 <p className="text-sm font-semibold text-gray-900 tracking-wide">
                   {method.cardholderName.toUpperCase()}
                 </p>
@@ -427,9 +415,6 @@ function ModernPaymentCard({
 
               <div className="flex items-end justify-between">
                 <div className="flex-1">
-                  <p className="text-xs font-medium text-gray-600 mb-1">
-                    {isPayPal ? "EMAIL" : "CARD NUMBER"}
-                  </p>
                   <p className="text-lg font-mono font-bold text-gray-900 tracking-widest">
                     {isPayPal
                       ? method.cardNumber
@@ -438,9 +423,6 @@ function ModernPaymentCard({
                 </div>
                 {!isPayPal && (
                   <div className="text-right">
-                    <p className="text-xs font-medium text-gray-600 mb-1">
-                      VALID
-                    </p>
                     <p className="font-mono font-bold text-sm text-gray-900">
                       {method.expiryDate}
                     </p>
