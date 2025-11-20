@@ -691,7 +691,7 @@ export default function Payments() {
         </div>
 
         <Tabs defaultValue="payment-methods" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 bg-gray-100 p-1">
+          <TabsList className="grid w-auto grid-cols-2 bg-gray-100 p-1">
             <TabsTrigger
               value="payment-methods"
               className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-valasys-orange data-[state=active]:to-valasys-orange-light data-[state=active]:text-white data-[state=active]:shadow-sm"
