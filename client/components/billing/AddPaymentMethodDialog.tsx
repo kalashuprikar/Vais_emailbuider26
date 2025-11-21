@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CreditCard, AlertCircle, Check, Zap } from "lucide-react";
+import { CreditCard, AlertCircle, Check } from "lucide-react";
 
 const COUNTRIES = [
   "United States",
