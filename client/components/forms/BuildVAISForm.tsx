@@ -491,15 +491,15 @@ export default function BuildVAISForm() {
     const dummyTheme = filterThemes[topicIndex % filterThemes.length];
 
     return (
-      <div className="space-y-4">
-        <div className="space-y-2">
-          <h3 className="text-lg font-bold text-valasys-gray-900">{topic.name}</h3>
+      <div className="space-y-5">
+        <div className="space-y-3 pb-5 border-b border-valasys-gray-200">
+          <h3 className="text-2xl font-bold text-valasys-gray-900">{topic.name}</h3>
           <p className="text-sm text-valasys-gray-600 leading-relaxed">{topic.description}</p>
         </div>
 
-        <div className="space-y-2">
-          <div className="flex items-center justify-between py-2 px-3 bg-valasys-gray-50 rounded">
-            <span className="text-sm font-medium text-valasys-gray-700 flex items-center">
+        <div className="bg-gradient-to-br from-valasys-orange/5 to-valasys-orange-light/5 border border-valasys-orange/20 rounded-lg p-4 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-semibold text-valasys-gray-700 flex items-center">
               <Target className="w-4 h-4 mr-2 text-valasys-orange" />
               Score
               <Tooltip>
@@ -513,21 +513,24 @@ export default function BuildVAISForm() {
                 </TooltipContent>
               </Tooltip>
             </span>
-            <span className="text-sm font-semibold text-valasys-gray-900">{topic.conversion}</span>
+            <span className="text-2xl font-bold text-valasys-orange">{topic.conversion}</span>
           </div>
-          <div className="flex items-center justify-between py-2 px-3 bg-valasys-gray-50 rounded">
-            <span className="text-sm font-medium text-valasys-gray-700 flex items-center">
-              <Tag className="w-4 h-4 mr-2 text-valasys-orange" />
+        </div>
+
+        <div className="space-y-2 pt-2">
+          <div className="flex items-center justify-between py-1.5 px-2">
+            <span className="text-xs font-medium text-valasys-gray-500 flex items-center uppercase tracking-wide">
+              <Tag className="w-3 h-3 mr-1.5 text-valasys-gray-400" />
               Topic Category
             </span>
-            <span className="text-sm font-semibold text-valasys-gray-900">{dummyCategory}</span>
+            <span className="text-xs text-valasys-gray-600">{dummyCategory}</span>
           </div>
-          <div className="flex items-center justify-between py-2 px-3 bg-valasys-gray-50 rounded">
-            <span className="text-sm font-medium text-valasys-gray-700 flex items-center">
-              <Layers className="w-4 h-4 mr-2 text-valasys-orange" />
+          <div className="flex items-center justify-between py-1.5 px-2">
+            <span className="text-xs font-medium text-valasys-gray-500 flex items-center uppercase tracking-wide">
+              <Layers className="w-3 h-3 mr-1.5 text-valasys-gray-400" />
               Topic Theme
             </span>
-            <span className="text-sm font-semibold text-valasys-gray-900">{dummyTheme}</span>
+            <span className="text-xs text-valasys-gray-600">{dummyTheme}</span>
           </div>
         </div>
       </div>
