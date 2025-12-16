@@ -182,7 +182,10 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="blocks" className="flex-1 flex flex-col overflow-hidden m-0">
+        <TabsContent
+          value="blocks"
+          className="flex-1 flex flex-col overflow-hidden m-0"
+        >
           <div className="p-4 border-b border-gray-200">
             <Input
               placeholder="Search blocks..."
@@ -212,7 +215,10 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
           </ScrollArea>
         </TabsContent>
 
-        <TabsContent value="sections" className="flex-1 flex flex-col overflow-hidden m-0">
+        <TabsContent
+          value="sections"
+          className="flex-1 flex flex-col overflow-hidden m-0"
+        >
           <ScrollArea className="flex-1">
             <div className="p-4">
               <div className="space-y-3">
@@ -226,14 +232,17 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
           </ScrollArea>
         </TabsContent>
 
-        <TabsContent value="saved" className="flex-1 flex flex-col overflow-hidden m-0">
+        <TabsContent
+          value="saved"
+          className="flex-1 flex flex-col overflow-hidden m-0"
+        >
           <ScrollArea className="flex-1">
             <div className="p-4">
               <div className="space-y-3">
                 <div className="p-4 rounded-lg border border-dashed border-gray-300 text-center">
                   <p className="text-sm text-gray-500">
-                    No saved blocks yet. Save your favorite blocks to access them
-                    quickly.
+                    No saved blocks yet. Save your favorite blocks to access
+                    them quickly.
                   </p>
                 </div>
               </div>
