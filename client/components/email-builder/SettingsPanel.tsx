@@ -30,7 +30,12 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
         return (
           <div className="space-y-5">
             <div>
-              <Label htmlFor="titleContent" className="text-xs font-semibold text-gray-700 mb-2 block">Content</Label>
+              <Label
+                htmlFor="titleContent"
+                className="text-xs font-semibold text-gray-700 mb-2 block"
+              >
+                Content
+              </Label>
               <textarea
                 id="titleContent"
                 value={block.content}
@@ -42,7 +47,12 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
               />
             </div>
             <div>
-              <Label htmlFor="titleFontSize" className="text-xs font-semibold text-gray-700 mb-2 block">Font Size</Label>
+              <Label
+                htmlFor="titleFontSize"
+                className="text-xs font-semibold text-gray-700 mb-2 block"
+              >
+                Font Size
+              </Label>
               <Input
                 id="titleFontSize"
                 type="number"
@@ -59,7 +69,12 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
               />
             </div>
             <div>
-              <Label htmlFor="titleFontColor" className="text-xs font-semibold text-gray-700 mb-2 block">Text Color</Label>
+              <Label
+                htmlFor="titleFontColor"
+                className="text-xs font-semibold text-gray-700 mb-2 block"
+              >
+                Text Color
+              </Label>
               <Input
                 id="titleFontColor"
                 type="color"
@@ -70,7 +85,12 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
               />
             </div>
             <div>
-              <Label htmlFor="titleBgColor" className="text-xs font-semibold text-gray-700 mb-2 block">Background Color</Label>
+              <Label
+                htmlFor="titleBgColor"
+                className="text-xs font-semibold text-gray-700 mb-2 block"
+              >
+                Background Color
+              </Label>
               <Input
                 id="titleBgColor"
                 type="color"
@@ -81,7 +101,12 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
               />
             </div>
             <div>
-              <Label htmlFor="titleAlignment" className="text-xs font-semibold text-gray-700 mb-2 block">Alignment</Label>
+              <Label
+                htmlFor="titleAlignment"
+                className="text-xs font-semibold text-gray-700 mb-2 block"
+              >
+                Alignment
+              </Label>
               <select
                 id="titleAlignment"
                 value={block.alignment}
@@ -104,7 +129,12 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
         return (
           <div className="space-y-5">
             <div>
-              <Label htmlFor="content" className="text-xs font-semibold text-gray-700 mb-2 block">Content</Label>
+              <Label
+                htmlFor="content"
+                className="text-xs font-semibold text-gray-700 mb-2 block"
+              >
+                Content
+              </Label>
               <textarea
                 id="content"
                 value={block.content}
@@ -194,7 +224,12 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
         return (
           <div className="space-y-5">
             <div>
-              <Label htmlFor="width" className="text-xs font-semibold text-gray-700 mb-2 block">Width (px)</Label>
+              <Label
+                htmlFor="width"
+                className="text-xs font-semibold text-gray-700 mb-2 block"
+              >
+                Width (px)
+              </Label>
               <Input
                 id="width"
                 type="number"
@@ -243,7 +278,12 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
         return (
           <div className="space-y-5">
             <div>
-              <Label htmlFor="btnText" className="text-xs font-semibold text-gray-700 mb-2 block">Button Text</Label>
+              <Label
+                htmlFor="btnText"
+                className="text-xs font-semibold text-gray-700 mb-2 block"
+              >
+                Button Text
+              </Label>
               <Input
                 id="btnText"
                 value={block.text}
@@ -775,9 +815,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
           <Trash2 className="w-4 h-4" />
         </Button>
       </div>
-      <div className="space-y-5">
-        {renderSettings()}
-      </div>
+      <div className="space-y-5">{renderSettings()}</div>
     </div>
   );
 };

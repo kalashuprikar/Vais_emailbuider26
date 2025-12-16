@@ -43,7 +43,10 @@ export const EmailCanvas: React.FC<EmailCanvasProps> = ({
         <div className="bg-white border border-gray-200 rounded-t-lg p-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="subject" className="text-xs font-medium text-gray-700 block">
+              <label
+                htmlFor="subject"
+                className="text-xs font-medium text-gray-700 block"
+              >
                 Subject
               </label>
               <input
@@ -56,7 +59,10 @@ export const EmailCanvas: React.FC<EmailCanvasProps> = ({
               />
             </div>
             <div>
-              <label htmlFor="bgColor" className="text-xs font-medium text-gray-700 block">
+              <label
+                htmlFor="bgColor"
+                className="text-xs font-medium text-gray-700 block"
+              >
                 Background
               </label>
               <div className="flex gap-2 mt-1">
@@ -88,7 +94,7 @@ export const EmailCanvas: React.FC<EmailCanvasProps> = ({
           }}
           className={cn(
             "bg-white border border-t-0 border-gray-200 rounded-b-lg shadow-sm min-h-96 transition-all",
-            isOver && "ring-2 ring-valasys-orange bg-orange-50"
+            isOver && "ring-2 ring-valasys-orange bg-orange-50",
           )}
         >
           {template.blocks.length === 0 ? (
@@ -98,7 +104,9 @@ export const EmailCanvas: React.FC<EmailCanvasProps> = ({
                   <Mail className="w-8 h-8 text-gray-300" />
                 </div>
               </div>
-              <p className="mb-2 text-gray-600 font-medium">Drop content here</p>
+              <p className="mb-2 text-gray-600 font-medium">
+                Drop content here
+              </p>
               <p className="text-sm text-gray-400">
                 Drag blocks from the left sidebar to add them to your email
               </p>
