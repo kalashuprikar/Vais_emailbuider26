@@ -29,9 +29,9 @@ export const NavigationBlockComponent: React.FC<
           <span className="text-xs font-semibold text-white">Navigation</span>
         </div>
         <div className="flex flex-wrap justify-center gap-4">
-          {block.items.map((item, index) => (
+          {block.items.map((item) => (
             <a
-              key={index}
+              key={`${item.label}-${item.link}`}
               href={item.link}
               style={{
                 color: block.textColor,

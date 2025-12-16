@@ -4,7 +4,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Type,
   Image,
@@ -188,8 +187,8 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
   );
 
   return (
-    <div className="flex flex-col h-full bg-white border-r border-gray-200">
-      <Tabs defaultValue="blocks" className="flex flex-col h-full">
+    <div className="flex flex-col bg-white border-r border-gray-200 w-full">
+      <Tabs defaultValue="blocks" className="flex flex-col">
         <TabsList className="flex w-full h-auto rounded-none border-b border-gray-200 bg-white p-0">
           <TabsTrigger
             value="blocks"
@@ -211,11 +210,8 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent
-          value="blocks"
-          className="flex-1 flex flex-col overflow-hidden m-0"
-        >
-          <div className="p-4 border-b border-gray-200">
+        <TabsContent value="blocks" className="flex flex-col m-0">
+          <div className="p-4 border-b border-gray-200 sticky top-0 bg-white z-10">
             <Input
               placeholder="Search blocks..."
               value={searchQuery}
@@ -224,50 +220,38 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
             />
           </div>
 
-          <ScrollArea className="flex-1">
-            <div className="p-4">
-              <div className="grid grid-cols-3 gap-3">
-                {filteredBlocks.map((block) => (
-                  <DraggableBlockButton key={block.id} block={block} />
-                ))}
-              </div>
+          <div className="p-4">
+            <div className="grid grid-cols-3 gap-3">
+              {filteredBlocks.map((block) => (
+                <DraggableBlockButton key={block.id} block={block} />
+              ))}
             </div>
-          </ScrollArea>
+          </div>
         </TabsContent>
 
-        <TabsContent
-          value="sections"
-          className="flex-1 flex flex-col overflow-hidden m-0"
-        >
-          <ScrollArea className="flex-1">
-            <div className="p-4">
-              <div className="space-y-3">
-                <div className="p-4 rounded-lg border border-dashed border-gray-300 text-center">
-                  <p className="text-sm text-gray-500">
-                    No pre-built sections yet. Create your own and save them!
-                  </p>
-                </div>
+        <TabsContent value="sections" className="flex flex-col m-0 p-4">
+          <div className="flex items-center justify-center py-8">
+            <div className="space-y-3 text-center">
+              <div className="p-4 rounded-lg border border-dashed border-gray-300">
+                <p className="text-sm text-gray-500">
+                  No pre-built sections yet. Create your own and save them!
+                </p>
               </div>
             </div>
-          </ScrollArea>
+          </div>
         </TabsContent>
 
-        <TabsContent
-          value="saved"
-          className="flex-1 flex flex-col overflow-hidden m-0"
-        >
-          <ScrollArea className="flex-1">
-            <div className="p-4">
-              <div className="space-y-3">
-                <div className="p-4 rounded-lg border border-dashed border-gray-300 text-center">
-                  <p className="text-sm text-gray-500">
-                    No saved blocks yet. Save your favorite blocks to access
-                    them quickly.
-                  </p>
-                </div>
+        <TabsContent value="saved" className="flex flex-col m-0 p-4">
+          <div className="flex items-center justify-center py-8">
+            <div className="space-y-3 text-center">
+              <div className="p-4 rounded-lg border border-dashed border-gray-300">
+                <p className="text-sm text-gray-500">
+                  No saved blocks yet. Save your favorite blocks to access them
+                  quickly.
+                </p>
               </div>
             </div>
-          </ScrollArea>
+          </div>
         </TabsContent>
       </Tabs>
     </div>

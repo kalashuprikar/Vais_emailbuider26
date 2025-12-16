@@ -216,9 +216,9 @@ export const EmailBuilder: React.FC<EmailBuilderProps> = ({
             ) : (
               <>
                 {/* Left Sidebar - Blocks Panel with Selected Blocks */}
-                <div className="flex flex-col w-72 bg-white border-r border-gray-200 overflow-hidden">
+                <div className="flex flex-col w-72 bg-white border-r border-gray-200 overflow-y-auto">
                   {/* Blocks/Sections/Saved Tabs */}
-                  <div className="flex-1 overflow-hidden flex flex-col">
+                  <div className="flex flex-col">
                     <BlocksPanel onAddBlock={handleAddBlock} />
                   </div>
                 </div>

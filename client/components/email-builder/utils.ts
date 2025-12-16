@@ -18,8 +18,14 @@ import {
   SpacerBlock,
 } from "./types";
 
+let idCounter = 0;
 export function generateId(): string {
-  return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  const timestamp = Date.now();
+  const counter = idCounter++ % 10000;
+  const random =
+    Math.random().toString(36).substring(2, 15) +
+    Math.random().toString(36).substring(2, 15);
+  return `${timestamp}-${counter}-${random}`;
 }
 
 export function createTitleBlock(content = "Click to edit title"): TitleBlock {
@@ -32,6 +38,14 @@ export function createTitleBlock(content = "Click to edit title"): TitleBlock {
     backgroundColor: "#ffffff",
     alignment: "left",
     fontWeight: "bold",
+    width: 100,
+    widthUnit: "%",
+    padding: 0,
+    margin: 0,
+    borderWidth: 0,
+    borderColor: "#000000",
+    borderRadius: 0,
+    visibility: "all",
   };
 }
 
@@ -46,6 +60,14 @@ export function createTextBlock(content = "Click to edit text"): TextBlock {
     alignment: "left",
     fontWeight: "normal",
     fontStyle: "normal",
+    width: 100,
+    widthUnit: "%",
+    padding: 0,
+    margin: 0,
+    borderWidth: 0,
+    borderColor: "#000000",
+    borderRadius: 0,
+    visibility: "all",
   };
 }
 
@@ -223,10 +245,30 @@ export function createEmptyTemplate(): EmailTemplate {
 
 export function renderBlockToHTML(block: ContentBlock): string {
   switch (block.type) {
-    case "title":
-      return `<h1 style="font-size: ${block.fontSize}px; color: ${block.fontColor}; background-color: ${block.backgroundColor}; text-align: ${block.alignment}; font-weight: ${block.fontWeight}; margin: 0;">${block.content}</h1>`;
-    case "text":
-      return `<p style="font-size: ${block.fontSize}px; color: ${block.fontColor}; background-color: ${block.backgroundColor}; text-align: ${block.alignment}; font-weight: ${block.fontWeight}; font-style: ${block.fontStyle};">${block.content}</p>`;
+    case "title": {
+      const titleBlock = block as TitleBlock;
+      const titleWidth =
+        titleBlock.widthUnit === "%"
+          ? `${titleBlock.width}%`
+          : `${titleBlock.width}px`;
+      const titleBorder =
+        titleBlock.borderWidth > 0
+          ? `border: ${titleBlock.borderWidth}px solid ${titleBlock.borderColor};`
+          : "";
+      return `<h1 style="font-size: ${titleBlock.fontSize}px; color: ${titleBlock.fontColor}; background-color: ${titleBlock.backgroundColor}; text-align: ${titleBlock.alignment}; font-weight: ${titleBlock.fontWeight}; margin: ${titleBlock.margin}px; padding: ${titleBlock.padding}px; width: ${titleWidth}; border-radius: ${titleBlock.borderRadius}px; ${titleBorder}">${titleBlock.content}</h1>`;
+    }
+    case "text": {
+      const textBlock = block as TextBlock;
+      const textWidth =
+        textBlock.widthUnit === "%"
+          ? `${textBlock.width}%`
+          : `${textBlock.width}px`;
+      const textBorder =
+        textBlock.borderWidth > 0
+          ? `border: ${textBlock.borderWidth}px solid ${textBlock.borderColor};`
+          : "";
+      return `<p style="font-size: ${textBlock.fontSize}px; color: ${textBlock.fontColor}; background-color: ${textBlock.backgroundColor}; text-align: ${textBlock.alignment}; font-weight: ${textBlock.fontWeight}; font-style: ${textBlock.fontStyle}; margin: ${textBlock.margin}px; padding: ${textBlock.padding}px; width: ${textWidth}; border-radius: ${textBlock.borderRadius}px; ${textBorder}">${textBlock.content}</p>`;
+    }
     case "image":
       return `<img src="${block.src}" alt="${block.alt}" style="width: ${block.width}px; height: ${block.height}px; display: block; margin: 0 auto;" />`;
     case "video":

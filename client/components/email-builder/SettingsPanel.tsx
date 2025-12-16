@@ -46,82 +46,370 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 rows={3}
               />
             </div>
+
             <div>
-              <Label
-                htmlFor="titleFontSize"
-                className="text-xs font-semibold text-gray-700 mb-2 block"
-              >
-                Font Size
-              </Label>
-              <Input
-                id="titleFontSize"
-                type="number"
-                min="12"
-                max="72"
-                value={block.fontSize}
-                onChange={(e) =>
-                  onBlockUpdate({
-                    ...block,
-                    fontSize: parseInt(e.target.value),
-                  })
-                }
-                className="focus:ring-valasys-orange focus:ring-2"
-              />
+              <h4 className="text-xs font-bold text-gray-900 mb-3">Layout</h4>
+              <div className="space-y-3">
+                <div>
+                  <Label
+                    htmlFor="titleWidth"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Width
+                  </Label>
+                  <div className="flex gap-2">
+                    <Input
+                      id="titleWidth"
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={block.width}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          width: parseInt(e.target.value),
+                        })
+                      }
+                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                    />
+                    <select
+                      value={block.widthUnit}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          widthUnit: e.target.value as "px" | "%",
+                        })
+                      }
+                      className="px-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-valasys-orange"
+                    >
+                      <option value="%">%</option>
+                      <option value="px">px</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <Label
+                    htmlFor="titleAlignment"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Block Alignment
+                  </Label>
+                  <div className="flex gap-2">
+                    <Button
+                      variant={
+                        block.alignment === "left" ? "default" : "outline"
+                      }
+                      size="sm"
+                      className="flex-1"
+                      onClick={() =>
+                        onBlockUpdate({ ...block, alignment: "left" })
+                      }
+                    >
+                      ⬅
+                    </Button>
+                    <Button
+                      variant={
+                        block.alignment === "center" ? "default" : "outline"
+                      }
+                      size="sm"
+                      className="flex-1"
+                      onClick={() =>
+                        onBlockUpdate({ ...block, alignment: "center" })
+                      }
+                    >
+                      ⬇
+                    </Button>
+                    <Button
+                      variant={
+                        block.alignment === "right" ? "default" : "outline"
+                      }
+                      size="sm"
+                      className="flex-1"
+                      onClick={() =>
+                        onBlockUpdate({ ...block, alignment: "right" })
+                      }
+                    >
+                      ➡
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </div>
+
             <div>
-              <Label
-                htmlFor="titleFontColor"
-                className="text-xs font-semibold text-gray-700 mb-2 block"
-              >
-                Text Color
-              </Label>
-              <Input
-                id="titleFontColor"
-                type="color"
-                value={block.fontColor}
-                onChange={(e) =>
-                  onBlockUpdate({ ...block, fontColor: e.target.value })
-                }
-              />
+              <h4 className="text-xs font-bold text-gray-900 mb-3">Spacing</h4>
+              <div className="space-y-3">
+                <div>
+                  <Label
+                    htmlFor="titlePadding"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Padding
+                  </Label>
+                  <div className="flex gap-2">
+                    <Input
+                      id="titlePadding"
+                      type="number"
+                      min="0"
+                      value={block.padding}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          padding: parseInt(e.target.value),
+                        })
+                      }
+                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                    />
+                    <span className="px-2 py-1 text-sm text-gray-600">px</span>
+                  </div>
+                </div>
+
+                <div>
+                  <Label
+                    htmlFor="titleMargin"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Margin
+                  </Label>
+                  <div className="flex gap-2">
+                    <Input
+                      id="titleMargin"
+                      type="number"
+                      min="0"
+                      value={block.margin}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          margin: parseInt(e.target.value),
+                        })
+                      }
+                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                    />
+                    <span className="px-2 py-1 text-sm text-gray-600">px</span>
+                  </div>
+                </div>
+              </div>
             </div>
+
             <div>
-              <Label
-                htmlFor="titleBgColor"
-                className="text-xs font-semibold text-gray-700 mb-2 block"
-              >
-                Background Color
-              </Label>
-              <Input
-                id="titleBgColor"
-                type="color"
-                value={block.backgroundColor}
-                onChange={(e) =>
-                  onBlockUpdate({ ...block, backgroundColor: e.target.value })
-                }
-              />
+              <h4 className="text-xs font-bold text-gray-900 mb-3">
+                Background
+              </h4>
+              <div className="space-y-3">
+                <div>
+                  <Label
+                    htmlFor="titleBgColor"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Color
+                  </Label>
+                  <Input
+                    id="titleBgColor"
+                    type="color"
+                    value={block.backgroundColor}
+                    onChange={(e) =>
+                      onBlockUpdate({
+                        ...block,
+                        backgroundColor: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+              </div>
             </div>
+
             <div>
-              <Label
-                htmlFor="titleAlignment"
-                className="text-xs font-semibold text-gray-700 mb-2 block"
-              >
-                Alignment
-              </Label>
-              <select
-                id="titleAlignment"
-                value={block.alignment}
-                onChange={(e) =>
-                  onBlockUpdate({
-                    ...block,
-                    alignment: e.target.value as any,
-                  })
-                }
-                className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-valasys-orange focus:border-transparent"
-              >
-                <option value="left">Left</option>
-                <option value="center">Center</option>
-                <option value="right">Right</option>
-              </select>
+              <h4 className="text-xs font-bold text-gray-900 mb-3">
+                Rounded corners
+              </h4>
+              <div className="space-y-3">
+                <div>
+                  <Label
+                    htmlFor="titleRadius"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Radius
+                  </Label>
+                  <div className="flex gap-2">
+                    <Input
+                      id="titleRadius"
+                      type="number"
+                      min="0"
+                      value={block.borderRadius}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          borderRadius: parseInt(e.target.value),
+                        })
+                      }
+                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                    />
+                    <span className="px-2 py-1 text-sm text-gray-600">px</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-xs font-bold text-gray-900 mb-3">Borders</h4>
+              <div className="space-y-3">
+                <div>
+                  <Label
+                    htmlFor="titleBorderWidth"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Size
+                  </Label>
+                  <div className="flex gap-2">
+                    <Input
+                      id="titleBorderWidth"
+                      type="number"
+                      min="0"
+                      value={block.borderWidth}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          borderWidth: parseInt(e.target.value),
+                        })
+                      }
+                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                    />
+                    <span className="px-2 py-1 text-sm text-gray-600">px</span>
+                  </div>
+                </div>
+
+                <div>
+                  <Label
+                    htmlFor="titleBorderColor"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Color
+                  </Label>
+                  <Input
+                    id="titleBorderColor"
+                    type="color"
+                    value={block.borderColor}
+                    onChange={(e) =>
+                      onBlockUpdate({ ...block, borderColor: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-xs font-bold text-gray-900 mb-3">
+                Typography
+              </h4>
+              <div className="space-y-3">
+                <div>
+                  <Label
+                    htmlFor="titleFontSize"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Font Size
+                  </Label>
+                  <Input
+                    id="titleFontSize"
+                    type="number"
+                    min="12"
+                    max="72"
+                    value={block.fontSize}
+                    onChange={(e) =>
+                      onBlockUpdate({
+                        ...block,
+                        fontSize: parseInt(e.target.value),
+                      })
+                    }
+                    className="focus:ring-valasys-orange focus:ring-2"
+                  />
+                </div>
+
+                <div>
+                  <Label
+                    htmlFor="titleFontWeight"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Font Weight
+                  </Label>
+                  <select
+                    id="titleFontWeight"
+                    value={block.fontWeight}
+                    onChange={(e) =>
+                      onBlockUpdate({
+                        ...block,
+                        fontWeight: e.target.value as any,
+                      })
+                    }
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-valasys-orange focus:border-transparent"
+                  >
+                    <option value="normal">Normal</option>
+                    <option value="bold">Bold</option>
+                  </select>
+                </div>
+
+                <div>
+                  <Label
+                    htmlFor="titleFontColor"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Text Color
+                  </Label>
+                  <Input
+                    id="titleFontColor"
+                    type="color"
+                    value={block.fontColor}
+                    onChange={(e) =>
+                      onBlockUpdate({ ...block, fontColor: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-xs font-bold text-gray-900 mb-3">
+                Content visibility
+              </h4>
+              <p className="text-xs text-gray-500 mb-3">
+                Display content based on the type of device or other specific
+                conditions
+              </p>
+              <div className="flex gap-2 flex-wrap">
+                <Button
+                  variant={block.visibility === "all" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => onBlockUpdate({ ...block, visibility: "all" })}
+                  className="text-xs"
+                >
+                  All devices
+                </Button>
+                <Button
+                  variant={
+                    block.visibility === "desktop" ? "default" : "outline"
+                  }
+                  size="sm"
+                  onClick={() =>
+                    onBlockUpdate({ ...block, visibility: "desktop" })
+                  }
+                  className="text-xs"
+                >
+                  Only on desktop
+                </Button>
+                <Button
+                  variant={
+                    block.visibility === "mobile" ? "default" : "outline"
+                  }
+                  size="sm"
+                  onClick={() =>
+                    onBlockUpdate({ ...block, visibility: "mobile" })
+                  }
+                  className="text-xs"
+                >
+                  Only on mobile
+                </Button>
+              </div>
             </div>
           </div>
         );
@@ -130,13 +418,13 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
           <div className="space-y-5">
             <div>
               <Label
-                htmlFor="content"
+                htmlFor="textContent"
                 className="text-xs font-semibold text-gray-700 mb-2 block"
               >
                 Content
               </Label>
               <textarea
-                id="content"
+                id="textContent"
                 value={block.content}
                 onChange={(e) =>
                   onBlockUpdate({ ...block, content: e.target.value })
@@ -145,78 +433,393 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 rows={4}
               />
             </div>
+
             <div>
-              <Label htmlFor="fontSize">Font Size</Label>
-              <Input
-                id="fontSize"
-                type="number"
-                min="8"
-                max="72"
-                value={block.fontSize}
-                onChange={(e) =>
-                  onBlockUpdate({
-                    ...block,
-                    fontSize: parseInt(e.target.value),
-                  })
-                }
-              />
+              <h4 className="text-xs font-bold text-gray-900 mb-3">Layout</h4>
+              <div className="space-y-3">
+                <div>
+                  <Label
+                    htmlFor="textWidth"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Width
+                  </Label>
+                  <div className="flex gap-2">
+                    <Input
+                      id="textWidth"
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={block.width}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          width: parseInt(e.target.value),
+                        })
+                      }
+                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                    />
+                    <select
+                      value={block.widthUnit}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          widthUnit: e.target.value as "px" | "%",
+                        })
+                      }
+                      className="px-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-valasys-orange"
+                    >
+                      <option value="%">%</option>
+                      <option value="px">px</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <Label
+                    htmlFor="textAlignment"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Block Alignment
+                  </Label>
+                  <div className="flex gap-2">
+                    <Button
+                      variant={
+                        block.alignment === "left" ? "default" : "outline"
+                      }
+                      size="sm"
+                      className="flex-1"
+                      onClick={() =>
+                        onBlockUpdate({ ...block, alignment: "left" })
+                      }
+                    >
+                      ⬅
+                    </Button>
+                    <Button
+                      variant={
+                        block.alignment === "center" ? "default" : "outline"
+                      }
+                      size="sm"
+                      className="flex-1"
+                      onClick={() =>
+                        onBlockUpdate({ ...block, alignment: "center" })
+                      }
+                    >
+                      ⬇
+                    </Button>
+                    <Button
+                      variant={
+                        block.alignment === "right" ? "default" : "outline"
+                      }
+                      size="sm"
+                      className="flex-1"
+                      onClick={() =>
+                        onBlockUpdate({ ...block, alignment: "right" })
+                      }
+                    >
+                      ➡
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </div>
+
             <div>
-              <Label htmlFor="fontColor">Text Color</Label>
-              <Input
-                id="fontColor"
-                type="color"
-                value={block.fontColor}
-                onChange={(e) =>
-                  onBlockUpdate({ ...block, fontColor: e.target.value })
-                }
-              />
+              <h4 className="text-xs font-bold text-gray-900 mb-3">Spacing</h4>
+              <div className="space-y-3">
+                <div>
+                  <Label
+                    htmlFor="textPadding"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Padding
+                  </Label>
+                  <div className="flex gap-2">
+                    <Input
+                      id="textPadding"
+                      type="number"
+                      min="0"
+                      value={block.padding}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          padding: parseInt(e.target.value),
+                        })
+                      }
+                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                    />
+                    <span className="px-2 py-1 text-sm text-gray-600">px</span>
+                  </div>
+                </div>
+
+                <div>
+                  <Label
+                    htmlFor="textMargin"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Margin
+                  </Label>
+                  <div className="flex gap-2">
+                    <Input
+                      id="textMargin"
+                      type="number"
+                      min="0"
+                      value={block.margin}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          margin: parseInt(e.target.value),
+                        })
+                      }
+                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                    />
+                    <span className="px-2 py-1 text-sm text-gray-600">px</span>
+                  </div>
+                </div>
+              </div>
             </div>
+
             <div>
-              <Label htmlFor="bgColor">Background Color</Label>
-              <Input
-                id="bgColor"
-                type="color"
-                value={block.backgroundColor}
-                onChange={(e) =>
-                  onBlockUpdate({ ...block, backgroundColor: e.target.value })
-                }
-              />
+              <h4 className="text-xs font-bold text-gray-900 mb-3">
+                Background
+              </h4>
+              <div className="space-y-3">
+                <div>
+                  <Label
+                    htmlFor="textBgColor"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Color
+                  </Label>
+                  <Input
+                    id="textBgColor"
+                    type="color"
+                    value={block.backgroundColor}
+                    onChange={(e) =>
+                      onBlockUpdate({
+                        ...block,
+                        backgroundColor: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+              </div>
             </div>
+
             <div>
-              <Label htmlFor="alignment">Alignment</Label>
-              <select
-                id="alignment"
-                value={block.alignment}
-                onChange={(e) =>
-                  onBlockUpdate({
-                    ...block,
-                    alignment: e.target.value as any,
-                  })
-                }
-                className="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-              >
-                <option value="left">Left</option>
-                <option value="center">Center</option>
-                <option value="right">Right</option>
-              </select>
+              <h4 className="text-xs font-bold text-gray-900 mb-3">
+                Rounded corners
+              </h4>
+              <div className="space-y-3">
+                <div>
+                  <Label
+                    htmlFor="textRadius"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Radius
+                  </Label>
+                  <div className="flex gap-2">
+                    <Input
+                      id="textRadius"
+                      type="number"
+                      min="0"
+                      value={block.borderRadius}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          borderRadius: parseInt(e.target.value),
+                        })
+                      }
+                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                    />
+                    <span className="px-2 py-1 text-sm text-gray-600">px</span>
+                  </div>
+                </div>
+              </div>
             </div>
+
             <div>
-              <Label htmlFor="fontWeight">Font Weight</Label>
-              <select
-                id="fontWeight"
-                value={block.fontWeight}
-                onChange={(e) =>
-                  onBlockUpdate({
-                    ...block,
-                    fontWeight: e.target.value as any,
-                  })
-                }
-                className="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-              >
-                <option value="normal">Normal</option>
-                <option value="bold">Bold</option>
-              </select>
+              <h4 className="text-xs font-bold text-gray-900 mb-3">Borders</h4>
+              <div className="space-y-3">
+                <div>
+                  <Label
+                    htmlFor="textBorderWidth"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Size
+                  </Label>
+                  <div className="flex gap-2">
+                    <Input
+                      id="textBorderWidth"
+                      type="number"
+                      min="0"
+                      value={block.borderWidth}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          borderWidth: parseInt(e.target.value),
+                        })
+                      }
+                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                    />
+                    <span className="px-2 py-1 text-sm text-gray-600">px</span>
+                  </div>
+                </div>
+
+                <div>
+                  <Label
+                    htmlFor="textBorderColor"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Color
+                  </Label>
+                  <Input
+                    id="textBorderColor"
+                    type="color"
+                    value={block.borderColor}
+                    onChange={(e) =>
+                      onBlockUpdate({ ...block, borderColor: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-xs font-bold text-gray-900 mb-3">
+                Typography
+              </h4>
+              <div className="space-y-3">
+                <div>
+                  <Label
+                    htmlFor="textFontSize"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Font Size
+                  </Label>
+                  <Input
+                    id="textFontSize"
+                    type="number"
+                    min="8"
+                    max="72"
+                    value={block.fontSize}
+                    onChange={(e) =>
+                      onBlockUpdate({
+                        ...block,
+                        fontSize: parseInt(e.target.value),
+                      })
+                    }
+                    className="focus:ring-valasys-orange focus:ring-2"
+                  />
+                </div>
+
+                <div>
+                  <Label
+                    htmlFor="textFontWeight"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Font Weight
+                  </Label>
+                  <select
+                    id="textFontWeight"
+                    value={block.fontWeight}
+                    onChange={(e) =>
+                      onBlockUpdate({
+                        ...block,
+                        fontWeight: e.target.value as any,
+                      })
+                    }
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-valasys-orange focus:border-transparent"
+                  >
+                    <option value="normal">Normal</option>
+                    <option value="bold">Bold</option>
+                  </select>
+                </div>
+
+                <div>
+                  <Label
+                    htmlFor="textFontStyle"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Font Style
+                  </Label>
+                  <select
+                    id="textFontStyle"
+                    value={block.fontStyle}
+                    onChange={(e) =>
+                      onBlockUpdate({
+                        ...block,
+                        fontStyle: e.target.value as any,
+                      })
+                    }
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-valasys-orange focus:border-transparent"
+                  >
+                    <option value="normal">Normal</option>
+                    <option value="italic">Italic</option>
+                  </select>
+                </div>
+
+                <div>
+                  <Label
+                    htmlFor="textFontColor"
+                    className="text-xs text-gray-700 mb-1 block"
+                  >
+                    Text Color
+                  </Label>
+                  <Input
+                    id="textFontColor"
+                    type="color"
+                    value={block.fontColor}
+                    onChange={(e) =>
+                      onBlockUpdate({ ...block, fontColor: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-xs font-bold text-gray-900 mb-3">
+                Content visibility
+              </h4>
+              <p className="text-xs text-gray-500 mb-3">
+                Display content based on the type of device or other specific
+                conditions
+              </p>
+              <div className="flex gap-2 flex-wrap">
+                <Button
+                  variant={block.visibility === "all" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => onBlockUpdate({ ...block, visibility: "all" })}
+                  className="text-xs"
+                >
+                  All devices
+                </Button>
+                <Button
+                  variant={
+                    block.visibility === "desktop" ? "default" : "outline"
+                  }
+                  size="sm"
+                  onClick={() =>
+                    onBlockUpdate({ ...block, visibility: "desktop" })
+                  }
+                  className="text-xs"
+                >
+                  Only on desktop
+                </Button>
+                <Button
+                  variant={
+                    block.visibility === "mobile" ? "default" : "outline"
+                  }
+                  size="sm"
+                  onClick={() =>
+                    onBlockUpdate({ ...block, visibility: "mobile" })
+                  }
+                  className="text-xs"
+                >
+                  Only on mobile
+                </Button>
+              </div>
             </div>
           </div>
         );

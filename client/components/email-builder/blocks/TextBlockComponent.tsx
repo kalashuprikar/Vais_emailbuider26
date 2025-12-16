@@ -17,12 +17,23 @@ export const TextBlockComponent: React.FC<TextBlockComponentProps> = ({
   onEdit,
   onContentChange,
 }) => {
+  const getWidthStyle = () => {
+    if (block.widthUnit === "%") {
+      return `${block.width}%`;
+    }
+    return `${block.width}px`;
+  };
+
   return (
     <div
-      className={`relative p-4 transition-all cursor-pointer ${
+      className={`relative transition-all cursor-pointer ${
         isSelected ? "ring-2 ring-valasys-orange" : ""
       }`}
       onClick={onEdit}
+      style={{
+        margin: `${block.margin}px`,
+        display: "block",
+      }}
     >
       {isEditing ? (
         <textarea
@@ -37,6 +48,12 @@ export const TextBlockComponent: React.FC<TextBlockComponentProps> = ({
             textAlign: block.alignment as any,
             fontWeight: block.fontWeight as any,
             fontStyle: block.fontStyle as any,
+            padding: `${block.padding}px`,
+            width: getWidthStyle(),
+            borderWidth: `${block.borderWidth}px`,
+            borderColor: block.borderColor,
+            borderStyle: block.borderWidth > 0 ? "solid" : "none",
+            borderRadius: `${block.borderRadius}px`,
           }}
         />
       ) : (
@@ -48,8 +65,13 @@ export const TextBlockComponent: React.FC<TextBlockComponentProps> = ({
             textAlign: block.alignment as any,
             fontWeight: block.fontWeight as any,
             fontStyle: block.fontStyle as any,
+            padding: `${block.padding}px`,
+            width: getWidthStyle(),
+            borderWidth: `${block.borderWidth}px`,
+            borderColor: block.borderColor,
+            borderStyle: block.borderWidth > 0 ? "solid" : "none",
+            borderRadius: `${block.borderRadius}px`,
             margin: 0,
-            padding: "8px",
           }}
         >
           {block.content}

@@ -22,6 +22,14 @@ export interface TitleBlock {
   backgroundColor: string;
   alignment: "left" | "center" | "right";
   fontWeight: "normal" | "bold";
+  width: number;
+  widthUnit: "px" | "%";
+  padding: number;
+  margin: number;
+  borderWidth: number;
+  borderColor: string;
+  borderRadius: number;
+  visibility: "all" | "desktop" | "mobile";
 }
 
 export interface TextBlock {
@@ -34,6 +42,14 @@ export interface TextBlock {
   alignment: "left" | "center" | "right";
   fontWeight: "normal" | "bold";
   fontStyle: "normal" | "italic";
+  width: number;
+  widthUnit: "px" | "%";
+  padding: number;
+  margin: number;
+  borderWidth: number;
+  borderColor: string;
+  borderRadius: number;
+  visibility: "all" | "desktop" | "mobile";
 }
 
 export interface ImageBlock {
