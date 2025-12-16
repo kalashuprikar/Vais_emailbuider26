@@ -1108,7 +1108,8 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     Type
                   </Label>
                   <select
-                    value="url"
+                    value={linkType}
+                    onChange={(e) => setLinkType(e.target.value)}
                     className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-valasys-orange focus:border-transparent"
                   >
                     <option value="url">Absolute Link (URL)</option>
