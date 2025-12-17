@@ -2982,7 +2982,6 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 </Button>
               </div>
             </div>
-
           </div>
         );
       case "product":
