@@ -163,26 +163,7 @@ const DraggableTemplateCard: React.FC<DraggableTemplateProps> = ({
 const SectionsPanel: React.FC<SectionsPanelProps> = ({ onAddBlock }) => {
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
 
-  const textImageTemplates: Template[] = [
-    {
-      id: "centered-image-card",
-      title: "Image Card with Title & CTA",
-      description:
-        "Centered layout with image banner, title, description and call-to-action button",
-      preview:
-        "https://images.unsplash.com/photo-1470114716159-e389f8712fda?w=400&h=200&fit=crop",
-      blocks: () => [createCenteredImageCardBlock()],
-    },
-    {
-      id: "split-image-card",
-      title: "Image + Content Split Card",
-      description:
-        "Left image with right content - title, description, optional label and CTA",
-      preview:
-        "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=200&fit=crop",
-      blocks: () => [createSplitImageCardBlock()],
-    },
-  ];
+  const textImageTemplates: Template[] = [];
 
   const sections: Section[] = [
     {
