@@ -91,7 +91,7 @@ export const FooterWithSocialBlockComponent: React.FC<
               onChange={(e) =>
                 handleFieldChange("enterpriseName", "content", e.target.value)
               }
-              onBlur={() => setEditingField(null)}
+              onBlur={() => onElementSelect?.(null)}
               autoFocus
               className="w-full border border-valasys-orange rounded px-2 py-1 text-center"
               style={{
