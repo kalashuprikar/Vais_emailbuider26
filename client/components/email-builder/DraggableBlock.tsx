@@ -68,14 +68,14 @@ export const DraggableBlock: React.FC<DraggableBlockProps> = ({
     <div
       ref={dragDropRef}
       className={cn(
-        "group transition-all cursor-move",
+        "group relative transition-all cursor-move",
         isDragging && "opacity-50 scale-95",
         isOver && "ring-2 ring-valasys-orange rounded-lg",
       )}
     >
       {/* Drag Hint */}
       {!isDragging && (
-        <div className="absolute left-0 top-0 h-full w-1 bg-valasys-orange opacity-0 group-hover:opacity-100 transition-opacity rounded-l-lg" />
+        <div className="absolute left-0 top-0 h-full w-1 bg-valasys-orange opacity-0 group-hover:opacity-100 transition-opacity rounded-l-lg pointer-events-none" />
       )}
 
       <BlockRenderer
