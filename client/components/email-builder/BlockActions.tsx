@@ -173,30 +173,6 @@ export const BlockActions: React.FC<BlockActionsProps> = ({
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {/* Move Up */}
-      <Button
-        variant="ghost"
-        size="sm"
-        className="h-8 w-8 p-0 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-        onClick={() => onMoveUp(blockIndex)}
-        disabled={blockIndex === 0}
-        title="Move block up"
-      >
-        <ChevronUp className="w-4 h-4 text-gray-700" />
-      </Button>
-
-      {/* Move Down */}
-      <Button
-        variant="ghost"
-        size="sm"
-        className="h-8 w-8 p-0 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-        onClick={() => onMoveDown(blockIndex)}
-        disabled={blockIndex === totalBlocks - 1}
-        title="Move block down"
-      >
-        <ChevronDown className="w-4 h-4 text-gray-700" />
-      </Button>
-
       {/* Duplicate */}
       <Button
         variant="ghost"
