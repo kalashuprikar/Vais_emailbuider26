@@ -2427,17 +2427,9 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
             {selectedFooterElement === "social" && (
               <>
                 <div>
-                  <SocialLinksEditor
+                  <FooterSocialLinksEditor
                     block={block as any}
-                    onBlockUpdate={(updatedSocial) => {
-                      onBlockUpdate({
-                        ...block,
-                        social: {
-                          ...block.social,
-                          platforms: updatedSocial.platforms,
-                        },
-                      });
-                    }}
+                    onBlockUpdate={onBlockUpdate}
                   />
                 </div>
 
