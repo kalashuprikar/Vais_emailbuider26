@@ -112,10 +112,9 @@ const availablePlatforms = [
   { name: "GitHub", icon: "github" },
 ];
 
-export const FooterSocialLinksEditor: React.FC<FooterSocialLinksEditorProps> = ({
-  block,
-  onBlockUpdate,
-}) => {
+export const FooterSocialLinksEditor: React.FC<
+  FooterSocialLinksEditorProps
+> = ({ block, onBlockUpdate }) => {
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
 
   const handleRemovePlatform = (index: number) => {
