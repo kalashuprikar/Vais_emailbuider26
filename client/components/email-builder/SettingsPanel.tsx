@@ -548,11 +548,11 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     type="number"
                     min="12"
                     max="72"
-                    value={block.fontSize}
+                    value={block.fontSize || 32}
                     onChange={(e) =>
                       onBlockUpdate({
                         ...block,
-                        fontSize: parseInt(e.target.value),
+                        fontSize: parseInt(e.target.value) || 32,
                       })
                     }
                     className="focus:ring-valasys-orange focus:ring-2"
