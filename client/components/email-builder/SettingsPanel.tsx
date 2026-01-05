@@ -125,7 +125,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                       type="number"
                       min="0"
                       max="100"
-                      value={block.width ?? 100}
+                      value={isNaN(block.width as any) ? 100 : block.width ?? 100}
                       onChange={(e) =>
                         onBlockUpdate({
                           ...block,
@@ -503,7 +503,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     <Input
                       type="number"
                       min="0"
-                      value={block.borderWidth ?? 0}
+                      value={block.borderWidth}
                       onChange={(e) =>
                         onBlockUpdate({
                           ...block,
@@ -522,7 +522,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                   </Label>
                   <Input
                     type="color"
-                    value={block.borderColor ?? "#000000"}
+                    value={block.borderColor}
                     onChange={(e) =>
                       onBlockUpdate({ ...block, borderColor: e.target.value })
                     }
@@ -548,7 +548,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     type="number"
                     min="12"
                     max="72"
-                    value={block.fontSize ?? 16}
+                    value={block.fontSize}
                     onChange={(e) =>
                       onBlockUpdate({
                         ...block,
@@ -1046,7 +1046,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     <Input
                       type="number"
                       min="0"
-                      value={block.borderWidth ?? 0}
+                      value={block.borderWidth}
                       onChange={(e) =>
                         onBlockUpdate({
                           ...block,
@@ -1065,7 +1065,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                   </Label>
                   <Input
                     type="color"
-                    value={block.borderColor ?? "#000000"}
+                    value={block.borderColor}
                     onChange={(e) =>
                       onBlockUpdate({ ...block, borderColor: e.target.value })
                     }
@@ -1087,7 +1087,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     type="number"
                     min="8"
                     max="72"
-                    value={block.fontSize ?? 16}
+                    value={block.fontSize}
                     onChange={(e) =>
                       onBlockUpdate({
                         ...block,
@@ -2232,7 +2232,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                       id="btnBorderSize"
                       type="number"
                       min="0"
-                      value={block.borderWidth ?? 0}
+                      value={block.borderWidth}
                       onChange={(e) =>
                         onBlockUpdate({
                           ...block,
@@ -2254,7 +2254,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                   <Input
                     id="btnBorderColor"
                     type="color"
-                    value={block.borderColor ?? "#000000"}
+                    value={block.borderColor}
                     onChange={(e) =>
                       onBlockUpdate({ ...block, borderColor: e.target.value })
                     }
@@ -3935,7 +3935,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     <Input
                       type="number"
                       min="0"
-                      value={block.borderWidth ?? 0}
+                      value={block.borderWidth}
                       onChange={(e) =>
                         onBlockUpdate({
                           ...block,
@@ -3954,7 +3954,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                   </Label>
                   <Input
                     type="color"
-                    value={block.borderColor ?? "#000000"}
+                    value={block.borderColor}
                     onChange={(e) =>
                       onBlockUpdate({ ...block, borderColor: e.target.value })
                     }
