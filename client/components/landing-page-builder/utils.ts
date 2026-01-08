@@ -313,7 +313,27 @@ export const createMeetFramerTemplate = (): LandingPageBlock[] => [
 ];
 
 export const createMeetFramerWithButtonsTemplate = (): LandingPageBlock[] => [
-  createHeroBlock(),
+  {
+    id: `hero-with-buttons-${Date.now()}`,
+    type: "hero",
+    properties: {
+      backgroundImageUrl: "",
+      backgroundType: "color",
+      backgroundColor: "#ffffff",
+      gradientStart: "#ffffff",
+      gradientEnd: "#f3f4f6",
+      headline: "Meet Framer",
+      subheading: "Internet canvas.",
+      ctaButtonText: "Sign Up",
+      ctaButtonLink: "#signup",
+      ctaButtonColor: "#111827",
+      minHeight: "400px",
+      secondaryButtonText: "Download",
+      secondaryButtonLink: "#download",
+      secondaryButtonColor: "#f3f4f6",
+      secondaryButtonTextColor: "#111827",
+    },
+  },
 ];
 
 export const createLogoTemplate = (): LandingPageBlock[] => [
