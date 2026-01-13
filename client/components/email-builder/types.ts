@@ -421,6 +421,27 @@ export interface StatsBlock {
   visibility: "all" | "desktop" | "mobile";
 }
 
+export interface FeaturesBlock {
+  type: "features";
+  id: string;
+  features: {
+    id: string;
+    icon: string;
+    title: string;
+    description: string;
+    fontSize: number;
+    titleFontSize: number;
+    textColor: string;
+    backgroundColor: string;
+    padding: number;
+    borderRadius: number;
+  }[];
+  width: number;
+  widthUnit: "px" | "%";
+  columnsCount: number;
+  visibility: "all" | "desktop" | "mobile";
+}
+
 export type ContentBlock =
   | TitleBlock
   | TextBlock
