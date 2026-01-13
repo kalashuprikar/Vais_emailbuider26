@@ -582,33 +582,41 @@ export function createPromoBlock(): HtmlBlock {
   };
 }
 
-export function createStatsBlock(): HtmlBlock {
+export function createStatsBlock() {
   return {
-    type: "html",
+    type: "stats",
     id: generateId(),
-    content: `<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin: 20px 0;">
-      <tr>
-        <td width="33%" style="text-align: center; padding: 20px;">
-          <h3 style="margin: 0 0 8px 0; font-size: 28px; font-weight: bold; color: #000;">4.8</h3>
-          <p style="margin: 0; font-size: 14px; color: #666;">Average rating</p>
-        </td>
-        <td width="33%" style="text-align: center; padding: 20px; border-left: 1px solid #e0e0e0; border-right: 1px solid #e0e0e0;">
-          <h3 style="margin: 0 0 8px 0; font-size: 28px; font-weight: bold; color: #000;">120</h3>
-          <p style="margin: 0; font-size: 14px; color: #666;">Reviews</p>
-        </td>
-        <td width="33%" style="text-align: center; padding: 20px;">
-          <h3 style="margin: 0 0 8px 0; font-size: 28px; font-weight: bold; color: #000;">200K</h3>
-          <p style="margin: 0; font-size: 14px; color: #666;">Downloads</p>
-        </td>
-      </tr>
-    </table>`,
+    stats: [
+      {
+        id: generateId(),
+        value: "4.8",
+        label: "Average rating",
+        fontSize: 28,
+        labelFontSize: 14,
+        textColor: "#000000",
+        padding: 20,
+      },
+      {
+        id: generateId(),
+        value: "120",
+        label: "Reviews",
+        fontSize: 28,
+        labelFontSize: 14,
+        textColor: "#000000",
+        padding: 20,
+      },
+      {
+        id: generateId(),
+        value: "200K",
+        label: "Downloads",
+        fontSize: 28,
+        labelFontSize: 14,
+        textColor: "#000000",
+        padding: 20,
+      },
+    ],
     width: 100,
     widthUnit: "%",
-    padding: 0,
-    margin: 0,
-    borderWidth: 0,
-    borderColor: "#000000",
-    borderRadius: 0,
     visibility: "all",
   };
 }
