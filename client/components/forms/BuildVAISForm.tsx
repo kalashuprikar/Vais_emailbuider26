@@ -937,7 +937,14 @@ export default function BuildVAISForm() {
             </div>
 
             {/* Step 2: Intent Topics Selection */}
-            <div data-tour="vais-intent-topics">
+            <div
+              data-tour="vais-intent-topics"
+              className={cn(
+                blinkingField === "intentTopics"
+                  ? "animate-pulse border-blink rounded-lg"
+                  : "",
+              )}
+            >
               <Card
                 className={cn(
                   "transition-all duration-200",
