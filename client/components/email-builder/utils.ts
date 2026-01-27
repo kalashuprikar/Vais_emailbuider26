@@ -281,9 +281,27 @@ export function createHeaderBlock(logo = ""): HeaderBlock {
     type: "header",
     id: generateId(),
     logo,
+    logoAlt: "Company Logo",
+    logoWidth: 40,
+    logoHeight: 40,
+    companyName: "Your Company",
+    companyFontSize: 18,
+    companyFontColor: "#000000",
+    companyFontWeight: "bold",
+    links: [
+      { id: generateId(), text: "Sign in", url: "#" },
+      { id: generateId(), text: "View Online", url: "#" },
+    ],
+    linksFontSize: 14,
+    linksFontColor: "#666666",
     backgroundColor: "#ffffff",
     padding: 20,
+    margin: 0,
+    borderWidth: 0,
+    borderColor: "#cccccc",
+    borderRadius: 0,
     alignment: "center",
+    visibility: "all",
   };
 }
 
@@ -965,8 +983,35 @@ export function renderBlockToHTML(block: ContentBlock): string {
     }
     case "navigation":
       return `<nav style="background-color: ${block.backgroundColor}; padding: 10px 0; text-align: ${block.alignment};"><a href="#" style="color: ${block.textColor}; margin: 0 15px; text-decoration: none;">Link</a></nav>`;
-    case "header":
-      return `<div style="background-color: ${block.backgroundColor}; padding: ${block.padding}px; text-align: ${block.alignment};"><img src="${block.logo}" alt="Logo" style="max-width: 200px; height: auto;" /></div>`;
+    case "header": {
+      const headerBlock = block as HeaderBlock;
+      const linksHtml = headerBlock.links
+        .map(
+          (link, index) =>
+            `<a href="${link.url}" style="color: ${headerBlock.linksFontColor}; text-decoration: none; font-size: ${headerBlock.linksFontSize}px; margin: 0 5px;">${link.text}</a>${
+              index < headerBlock.links.length - 1
+                ? `<span style="color: ${headerBlock.linksFontColor}; margin: 0 5px;">|</span>`
+                : ""
+            }`,
+        )
+        .join("");
+
+      return `<div style="display: flex; align-items: center; justify-content: space-between; background-color: ${headerBlock.backgroundColor}; padding: ${headerBlock.padding}px; margin: ${headerBlock.margin}px; border-width: ${headerBlock.borderWidth}px; border-color: ${headerBlock.borderColor}; border-radius: ${headerBlock.borderRadius}px;">
+        <div style="flex-shrink: 0;">
+          ${
+            headerBlock.logo
+              ? `<img src="${headerBlock.logo}" alt="${headerBlock.logoAlt}" style="width: ${headerBlock.logoWidth}px; height: ${headerBlock.logoHeight}px; object-fit: contain;" />`
+              : ""
+          }
+        </div>
+        <div style="flex-grow: 1; text-align: center; padding: 0 20px;">
+          <span style="font-size: ${headerBlock.companyFontSize}px; color: ${headerBlock.companyFontColor}; font-weight: ${headerBlock.companyFontWeight};">${headerBlock.companyName}</span>
+        </div>
+        <div style="flex-shrink: 0;">
+          ${linksHtml}
+        </div>
+      </div>`;
+    }
     case "footer":
       return `<footer style="background-color: ${block.backgroundColor}; color: ${block.textColor}; font-size: ${block.fontSize}px; padding: ${block.padding}px; text-align: center;">${block.content}</footer>`;
     case "footer-with-social": {

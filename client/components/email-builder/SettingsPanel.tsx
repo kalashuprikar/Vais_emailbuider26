@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ContentBlock } from "./types";
+import { ContentBlock, HeaderBlock } from "./types";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -7,6 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Trash2, X } from "lucide-react";
 import { SocialLinksEditor } from "./SocialLinksEditor";
 import { FooterSocialLinksEditor } from "./FooterSocialLinksEditor";
+import { generateId } from "./utils";
 
 interface SettingsPanelProps {
   block: ContentBlock | null;
@@ -41,7 +42,9 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
   const [marginRight, setMarginRight] = useState(marginValue);
   const [marginBottom, setMarginBottom] = useState(marginValue);
   const [marginLeft, setMarginLeft] = useState(marginValue);
-  const [selectedFeatureId, setSelectedFeatureId] = useState<string | null>(null);
+  const [selectedFeatureId, setSelectedFeatureId] = useState<string | null>(
+    null,
+  );
 
   // Initialize selectedCardId when block changes to twoColumnCard
   React.useEffect(() => {
@@ -2364,33 +2367,253 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
             </div>
           </div>
         );
-      case "header":
+      case "header": {
+        const headerBlock = block as HeaderBlock;
         return (
           <div className="space-y-4">
+            {/* Logo Upload */}
+            <div>
+              <Label>Logo</Label>
+              {headerBlock.logo && (
+                <div className="mb-2 flex items-center gap-2">
+                  <img
+                    src={headerBlock.logo}
+                    alt="Logo"
+                    className="max-h-12 max-w-12"
+                  />
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => onBlockUpdate({ ...headerBlock, logo: "" })}
+                  >
+                    Remove
+                  </Button>
+                </div>
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                      onBlockUpdate({
+                        ...headerBlock,
+                        logo: event.target?.result as string,
+                      });
+                    };
+                    reader.readAsDataURL(file);
+                  }
+                }}
+                className="w-full border border-gray-300 rounded px-2 py-1 text-sm"
+              />
+            </div>
+
+            {/* Logo Dimensions */}
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <Label htmlFor="logoWidth">Logo Width (px)</Label>
+                <Input
+                  id="logoWidth"
+                  type="number"
+                  value={headerBlock.logoWidth}
+                  onChange={(e) =>
+                    onBlockUpdate({
+                      ...headerBlock,
+                      logoWidth: parseInt(e.target.value),
+                    })
+                  }
+                />
+              </div>
+              <div>
+                <Label htmlFor="logoHeight">Logo Height (px)</Label>
+                <Input
+                  id="logoHeight"
+                  type="number"
+                  value={headerBlock.logoHeight}
+                  onChange={(e) =>
+                    onBlockUpdate({
+                      ...headerBlock,
+                      logoHeight: parseInt(e.target.value),
+                    })
+                  }
+                />
+              </div>
+            </div>
+
+            {/* Company Name */}
+            <div>
+              <Label htmlFor="companyName">Company Name</Label>
+              <Input
+                id="companyName"
+                type="text"
+                value={headerBlock.companyName}
+                onChange={(e) =>
+                  onBlockUpdate({ ...headerBlock, companyName: e.target.value })
+                }
+              />
+            </div>
+
+            {/* Company Name Styling */}
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <Label htmlFor="companyFontSize">Name Font Size (px)</Label>
+                <Input
+                  id="companyFontSize"
+                  type="number"
+                  value={headerBlock.companyFontSize}
+                  onChange={(e) =>
+                    onBlockUpdate({
+                      ...headerBlock,
+                      companyFontSize: parseInt(e.target.value),
+                    })
+                  }
+                />
+              </div>
+              <div>
+                <Label htmlFor="companyFontColor">Name Color</Label>
+                <Input
+                  id="companyFontColor"
+                  type="color"
+                  value={headerBlock.companyFontColor}
+                  onChange={(e) =>
+                    onBlockUpdate({
+                      ...headerBlock,
+                      companyFontColor: e.target.value,
+                    })
+                  }
+                />
+              </div>
+            </div>
+
+            {/* Links */}
+            <div>
+              <Label>Links</Label>
+              <div className="space-y-2">
+                {headerBlock.links.map((link, index) => (
+                  <div key={link.id} className="flex gap-1">
+                    <Input
+                      type="text"
+                      placeholder="Link text"
+                      value={link.text}
+                      onChange={(e) => {
+                        const newLinks = [...headerBlock.links];
+                        newLinks[index].text = e.target.value;
+                        onBlockUpdate({ ...headerBlock, links: newLinks });
+                      }}
+                      className="flex-1"
+                    />
+                    <Input
+                      type="text"
+                      placeholder="URL"
+                      value={link.url}
+                      onChange={(e) => {
+                        const newLinks = [...headerBlock.links];
+                        newLinks[index].url = e.target.value;
+                        onBlockUpdate({ ...headerBlock, links: newLinks });
+                      }}
+                      className="flex-1"
+                    />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        const newLinks = headerBlock.links.filter(
+                          (_, i) => i !== index,
+                        );
+                        onBlockUpdate({ ...headerBlock, links: newLinks });
+                      }}
+                    >
+                      ✕
+                    </Button>
+                  </div>
+                ))}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full"
+                  onClick={() => {
+                    onBlockUpdate({
+                      ...headerBlock,
+                      links: [
+                        ...headerBlock.links,
+                        { id: generateId(), text: "", url: "" },
+                      ],
+                    });
+                  }}
+                >
+                  + Add Link
+                </Button>
+              </div>
+            </div>
+
+            {/* Links Styling */}
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <Label htmlFor="linksFontSize">Links Font Size (px)</Label>
+                <Input
+                  id="linksFontSize"
+                  type="number"
+                  value={headerBlock.linksFontSize}
+                  onChange={(e) =>
+                    onBlockUpdate({
+                      ...headerBlock,
+                      linksFontSize: parseInt(e.target.value),
+                    })
+                  }
+                />
+              </div>
+              <div>
+                <Label htmlFor="linksFontColor">Links Color</Label>
+                <Input
+                  id="linksFontColor"
+                  type="color"
+                  value={headerBlock.linksFontColor}
+                  onChange={(e) =>
+                    onBlockUpdate({
+                      ...headerBlock,
+                      linksFontColor: e.target.value,
+                    })
+                  }
+                />
+              </div>
+            </div>
+
+            {/* Background Color */}
             <div>
               <Label htmlFor="headerBgColor">Background Color</Label>
               <Input
                 id="headerBgColor"
                 type="color"
-                value={block.backgroundColor}
+                value={headerBlock.backgroundColor}
                 onChange={(e) =>
-                  onBlockUpdate({ ...block, backgroundColor: e.target.value })
+                  onBlockUpdate({
+                    ...headerBlock,
+                    backgroundColor: e.target.value,
+                  })
                 }
               />
             </div>
+
+            {/* Padding */}
             <div>
               <Label htmlFor="headerPadding">Padding (px)</Label>
               <Input
                 id="headerPadding"
                 type="number"
-                value={block.padding}
+                value={headerBlock.padding}
                 onChange={(e) =>
-                  onBlockUpdate({ ...block, padding: parseInt(e.target.value) })
+                  onBlockUpdate({
+                    ...headerBlock,
+                    padding: parseInt(e.target.value),
+                  })
                 }
               />
             </div>
           </div>
         );
+      }
       case "footer":
         return (
           <div className="space-y-4">
@@ -5635,14 +5858,20 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                           type="color"
                           value={selectedFeature.backgroundColor}
                           onChange={(e) =>
-                            handleFeatureUpdate("backgroundColor", e.target.value)
+                            handleFeatureUpdate(
+                              "backgroundColor",
+                              e.target.value,
+                            )
                           }
                           className="w-12 h-10 rounded border border-gray-300 cursor-pointer"
                         />
                         <Input
                           value={selectedFeature.backgroundColor}
                           onChange={(e) =>
-                            handleFeatureUpdate("backgroundColor", e.target.value)
+                            handleFeatureUpdate(
+                              "backgroundColor",
+                              e.target.value,
+                            )
                           }
                           placeholder="#ffffff"
                           className="flex-1 text-xs focus:ring-valasys-orange focus:ring-2"

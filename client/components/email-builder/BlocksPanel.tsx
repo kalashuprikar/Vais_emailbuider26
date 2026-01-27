@@ -33,6 +33,7 @@ import {
   createDividerBlock,
   createProductBlock,
   createNavigationBlock,
+  createHeaderBlock,
   createSpacerBlock,
   createCenteredImageCardBlock,
   createSplitImageCardBlock,
@@ -284,6 +285,15 @@ const SectionsPanel: React.FC<SectionsPanelProps> = ({ onAddBlock }) => {
           preview:
             "data:image/svg+xml,%3Csvg width='400' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='400' height='200' fill='%23ffffff'/%3E%3Crect x='150' y='30' width='100' height='40' fill='%23666666' rx='4'/%3E%3Ctext x='200' y='56' font-size='12' font-weight='bold' text-anchor='middle' fill='white'%3ELogo%3C/text%3E%3Ctext x='100' y='95' font-size='11' text-anchor='middle' fill='%23333'%3EOrder now%3C/text%3E%3Ctext x='200' y='95' font-size='11' text-anchor='middle' fill='%23333'%3EContact us%3C/text%3E%3Ctext x='300' y='95' font-size='11' text-anchor='middle' fill='%23333'%3EFind a shop%3C/text%3E%3Cline x1='20' y1='120' x2='380' y2='120' stroke='%23e0e0e0' stroke-width='1'/%3E%3C/svg%3E",
           blocks: () => createHeaderLogoAndNavigationTemplate(),
+        },
+      ],
+      blocks: [
+        {
+          id: "header",
+          icon: <Menu className="w-6 h-6 text-valasys-orange" />,
+          label: "Header",
+          description: "Logo, company name, and links",
+          onCreate: () => createHeaderBlock(),
         },
       ],
     },

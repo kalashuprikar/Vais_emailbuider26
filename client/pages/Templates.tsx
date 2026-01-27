@@ -18,8 +18,9 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   getTemplatesFromLocalStorage,
   deleteTemplateFromLocalStorage,
+  renderTemplateToHTML,
 } from "@/components/email-builder/utils";
-import { Mail, Plus, Trash2, Edit2, Eye } from "lucide-react";
+import { Mail, Plus, Trash2, Edit2, Download } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type View = "list" | "editor";
@@ -55,6 +56,17 @@ export default function Templates() {
     setTemplates(templates.filter((t) => t.id !== id));
     setShowDeleteDialog(false);
     setDeleteTargetId(null);
+  };
+
+  const handleDownloadTemplate = (template: EmailTemplate) => {
+    const htmlContent = renderTemplateToHTML(template);
+    const element = document.createElement("a");
+    const file = new Blob([htmlContent], { type: "text/html" });
+    element.href = URL.createObjectURL(file);
+    element.download = `${template.name || "template"}.html`;
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
   };
 
   const handleBackToList = () => {
@@ -183,6 +195,14 @@ export default function Templates() {
                         >
                           <Edit2 className="w-4 h-4 mr-1" />
                           Edit
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          title="Download as HTML"
+                          onClick={() => handleDownloadTemplate(template)}
+                        >
+                          <Download className="w-4 h-4" />
                         </Button>
                         <Button
                           variant="outline"

@@ -238,6 +238,20 @@ export interface HeaderBlock {
   type: "header";
   id: string;
   logo: string;
+  logoAlt: string;
+  logoWidth: number;
+  logoHeight: number;
+  companyName: string;
+  companyFontSize: number;
+  companyFontColor: string;
+  companyFontWeight: "normal" | "bold";
+  links: {
+    id: string;
+    text: string;
+    url: string;
+  }[];
+  linksFontSize: number;
+  linksFontColor: string;
   backgroundColor: string;
   padding: number;
   margin: number;
