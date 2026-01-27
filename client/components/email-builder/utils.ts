@@ -747,7 +747,7 @@ export function renderBlockToHTML(block: ContentBlock): string {
           : imageBlock.alignment === "right"
             ? "block; margin-left: auto;"
             : "block; margin: auto;";
-      return `<img src="${imageBlock.src}" alt="${imageBlock.alt}" style="width: ${imageWidth}; height: ${imageHeight}; display: ${imageDisplay} padding: ${imageBlock.padding}px; margin: ${imageBlock.margin}px; border-radius: ${imageBlock.borderRadius}px; ${imageBorder}" />`;
+      return `<img src="${imageBlock.src}" alt="${imageBlock.alt}" style="width: ${imageWidth}; height: ${imageHeight}; display: ${imageDisplay}; padding: ${imageBlock.padding}px; margin: ${imageBlock.margin}px; border-radius: ${imageBlock.borderRadius}px; ${imageBorder}" />`;
     }
     case "video": {
       const videoBlock = block as VideoBlock;
