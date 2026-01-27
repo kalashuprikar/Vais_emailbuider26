@@ -14,7 +14,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Copy, Download, FileJson } from "lucide-react";
+import { Copy, Download } from "lucide-react";
 import { toast } from "sonner";
 
 interface SourceCodeViewProps {
