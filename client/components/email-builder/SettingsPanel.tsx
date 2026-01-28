@@ -2655,6 +2655,10 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     src={headerBlock.logo}
                     alt="Logo"
                     className="max-h-12 max-w-12"
+                    onError={(e) => {
+                      console.error("❌ Logo image failed to load. Check the URL or try uploading again.");
+                      (e.target as HTMLImageElement).style.border = "2px solid red";
+                    }}
                   />
                   <Button
                     variant="outline"
@@ -2665,24 +2669,55 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                   </Button>
                 </div>
               )}
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (event) => {
+              <div className="space-y-2">
+                <div>
+                  <label className="text-xs text-gray-600 mb-1 block">Upload Image</label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        if (file.size > 1024 * 1024) {
+                          console.warn("⚠️ Large image detected! File size: " + (file.size / 1024 / 1024).toFixed(2) + "MB. Consider using a smaller image.");
+                        }
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                          const result = event.target?.result as string;
+                          if (result) {
+                            console.log("✅ Logo image loaded successfully");
+                            onBlockUpdate({
+                              ...headerBlock,
+                              logo: result,
+                            });
+                          }
+                        };
+                        reader.onerror = () => {
+                          console.error("❌ Failed to read image file");
+                        };
+                        reader.readAsDataURL(file);
+                      }
+                    }}
+                    className="w-full border border-gray-300 rounded px-2 py-1 text-sm"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs text-gray-600 mb-1 block">Or paste Image URL</label>
+                  <Input
+                    type="text"
+                    placeholder="https://example.com/logo.png"
+                    value={headerBlock.logo}
+                    onChange={(e) => {
+                      const url = e.target.value;
                       onBlockUpdate({
                         ...headerBlock,
-                        logo: event.target?.result as string,
+                        logo: url,
                       });
-                    };
-                    reader.readAsDataURL(file);
-                  }
-                }}
-                className="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-              />
+                    }}
+                    className="text-sm"
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Logo Dimensions */}
