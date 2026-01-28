@@ -144,7 +144,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                       id="titleWidth"
                       type="number"
                       min="0"
-                      max="100"
+                      max={block.widthUnit === "%" ? 100 : 2000}
                       value={
                         isNaN(block.width as any) ? 100 : (block.width ?? 100)
                       }
