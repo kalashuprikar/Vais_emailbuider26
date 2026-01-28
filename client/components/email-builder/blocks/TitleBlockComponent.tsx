@@ -22,13 +22,36 @@ export const TitleBlockComponent: React.FC<TitleBlockComponentProps> = ({
     onEdit();
   };
 
+  const containerStyle = {
+    userSelect: "none" as const,
+    width: block.width ? `${block.width}${block.widthUnit || "%"}` : "100%",
+    margin: `${block.margin || 0}px`,
+    marginLeft: isNaN(block.marginLeft as any) ? block.margin || 0 : block.marginLeft,
+    marginRight: isNaN(block.marginRight as any) ? block.margin || 0 : block.marginRight,
+    marginTop: isNaN(block.marginTop as any) ? block.margin || 0 : block.marginTop,
+    marginBottom: isNaN(block.marginBottom as any) ? block.margin || 0 : block.marginBottom,
+  };
+
+  const textStyle = {
+    fontSize: `${block.fontSize}px`,
+    color: block.fontColor,
+    backgroundColor: block.backgroundColor,
+    textAlign: block.alignment as any,
+    fontWeight: block.fontWeight as any,
+    margin: 0,
+    padding: `${block.paddingTop || block.padding || 8}px ${block.paddingRight || block.padding || 8}px ${block.paddingBottom || block.padding || 8}px ${block.paddingLeft || block.padding || 8}px`,
+    userSelect: "none" as const,
+    borderRadius: block.borderRadius ? `${block.borderRadius}px` : undefined,
+    border: block.borderWidth ? `${block.borderWidth}px solid ${block.borderColor}` : undefined,
+  };
+
   return (
     <div
-      className={`relative p-4 transition-all cursor-pointer user-select-none ${
+      className={`relative transition-all cursor-pointer ${
         isSelected ? "ring-2 ring-valasys-orange" : ""
       }`}
       onClick={handleClick}
-      style={{ userSelect: "none" }}
+      style={containerStyle}
     >
       {isEditing ? (
         <textarea
@@ -36,28 +59,10 @@ export const TitleBlockComponent: React.FC<TitleBlockComponentProps> = ({
           onChange={(e) => onContentChange(e.target.value)}
           autoFocus
           className="w-full border border-valasys-orange rounded px-2 py-1 font-serif"
-          style={{
-            fontSize: `${block.fontSize}px`,
-            color: block.fontColor,
-            backgroundColor: block.backgroundColor,
-            textAlign: block.alignment as any,
-            fontWeight: block.fontWeight as any,
-            userSelect: "text",
-          }}
+          style={textStyle}
         />
       ) : (
-        <h1
-          style={{
-            fontSize: `${block.fontSize}px`,
-            color: block.fontColor,
-            backgroundColor: block.backgroundColor,
-            textAlign: block.alignment as any,
-            fontWeight: block.fontWeight as any,
-            margin: 0,
-            padding: "8px",
-            userSelect: "none",
-          }}
-        >
+        <h1 style={textStyle}>
           {block.content}
         </h1>
       )}
