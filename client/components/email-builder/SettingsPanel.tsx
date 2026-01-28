@@ -4558,7 +4558,12 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => onBlockUpdate({ ...block, width: Math.max(10, (block.width ?? 100) - 10) })}
+                      onClick={() =>
+                        onBlockUpdate({
+                          ...block,
+                          width: Math.max(10, (block.width ?? 100) - 10),
+                        })
+                      }
                       className="px-2"
                     >
                       −
@@ -4582,7 +4587,12 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => onBlockUpdate({ ...block, width: (block.width ?? 100) + 10 })}
+                      onClick={() =>
+                        onBlockUpdate({
+                          ...block,
+                          width: (block.width ?? 100) + 10,
+                        })
+                      }
                       className="px-2"
                     >
                       +
