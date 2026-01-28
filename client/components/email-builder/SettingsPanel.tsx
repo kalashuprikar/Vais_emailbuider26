@@ -747,16 +747,23 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                   </Label>
                   <div className="flex gap-2">
                     <Input
-                      type="number"
-                      min="0"
-                      step="any"
+                      type="text"
+                      inputMode="numeric"
                       value={block.width ?? 100}
                       onChange={(e) => {
-                        const value = e.target.value ? parseInt(e.target.value) : 100;
-                        onBlockUpdate({
-                          ...block,
-                          width: value,
-                        });
+                        const inputValue = e.target.value;
+                        const numericValue = inputValue.replace(/[^\d]/g, '');
+                        if (numericValue === '') {
+                          onBlockUpdate({
+                            ...block,
+                            width: 100,
+                          });
+                        } else {
+                          onBlockUpdate({
+                            ...block,
+                            width: parseInt(numericValue),
+                          });
+                        }
                       }}
                       className="flex-1 focus:ring-valasys-orange focus:ring-2"
                     />
