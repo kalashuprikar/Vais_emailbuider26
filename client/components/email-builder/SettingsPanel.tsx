@@ -25,7 +25,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
   onFooterElementSelect,
 }) => {
   const [groupPaddingSides, setGroupPaddingSides] = useState(true);
-  const [groupMarginSides, setGroupMarginSides] = useState(false);
+  const [groupMarginSides, setGroupMarginSides] = useState(true);
   const [applyBorderToAllSides, setApplyBorderToAllSides] = useState(true);
   const [linkType, setLinkType] = useState("url");
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
