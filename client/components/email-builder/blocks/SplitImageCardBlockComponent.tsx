@@ -170,7 +170,7 @@ export const SplitImageCardBlockComponent: React.FC<
                 ) : (
                   <p
                     onClick={() => setEditMode("buttonLink")}
-                    className="text-xs text-gray-500 cursor-pointer hover:text-valasys-orange p-2 rounded hover:bg-orange-50 break-all"
+                    className="text-xs text-gray-500 cursor-pointer p-2 rounded break-all"
                   >
                     {block.buttonLink || "No link set"}
                   </p>
