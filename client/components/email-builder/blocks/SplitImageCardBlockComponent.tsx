@@ -207,138 +207,146 @@ export const SplitImageCardBlockComponent: React.FC<
 
           <div className={isImageLeft ? "md:w-3/5" : "md:w-3/5 order-first"}>
             <div className="space-y-3 p-4">
-              <div>
-                {editMode === "title" ? (
-                  <Input
-                    value={block.title}
-                    onChange={(e) => handleFieldChange("title", e.target.value)}
-                    onBlur={() => setEditMode(null)}
-                    autoFocus
-                    className="font-bold text-lg focus:outline-none"
-                    style={{ border: "2px solid rgb(255, 106, 0)" }}
-                  />
-                ) : (
-                  <p
-                    onClick={() => setEditMode("title")}
-                    onMouseEnter={() => setIsHoveringTitle(true)}
-                    onMouseLeave={() => setIsHoveringTitle(false)}
-                    className="font-bold text-lg text-gray-900 cursor-pointer p-3 rounded transition-all"
-                    style={{
-                      border: isHoveringTitle
-                        ? "1px dashed rgb(255, 106, 0)"
-                        : "none",
-                    }}
-                  >
-                    {block.title}
-                  </p>
-                )}
-                {editMode === "title" && <SectionToolbar sectionType="title" />}
-              </div>
+              {(block.title || editMode === "title") && (
+                <div>
+                  {editMode === "title" ? (
+                    <Input
+                      value={block.title}
+                      onChange={(e) => handleFieldChange("title", e.target.value)}
+                      onBlur={() => setEditMode(null)}
+                      autoFocus
+                      className="font-bold text-lg focus:outline-none"
+                      style={{ border: "2px solid rgb(255, 106, 0)" }}
+                    />
+                  ) : (
+                    <p
+                      onClick={() => setEditMode("title")}
+                      onMouseEnter={() => setIsHoveringTitle(true)}
+                      onMouseLeave={() => setIsHoveringTitle(false)}
+                      className="font-bold text-lg text-gray-900 cursor-pointer p-3 rounded transition-all"
+                      style={{
+                        border: isHoveringTitle
+                          ? "1px dashed rgb(255, 106, 0)"
+                          : "none",
+                      }}
+                    >
+                      {block.title}
+                    </p>
+                  )}
+                  {editMode === "title" && <SectionToolbar sectionType="title" />}
+                </div>
+              )}
 
-              <div>
-                {editMode === "description" ? (
-                  <textarea
-                    value={block.description}
-                    onChange={(e) =>
-                      handleFieldChange("description", e.target.value)
-                    }
-                    onBlur={() => setEditMode(null)}
-                    autoFocus
-                    className="w-full resize-none"
-                    style={{
-                      padding: "1rem",
-                      borderRadius: "0.5rem",
-                      fontSize: "0.875rem",
-                      color: "rgb(55, 65, 81)",
-                      minHeight: "6rem",
-                      border: "2px solid rgb(255, 106, 0)",
-                      boxSizing: "border-box",
-                      outline: "none",
-                      backgroundColor: "white",
-                    }}
-                  />
-                ) : (
-                  <p
-                    onClick={() => setEditMode("description")}
-                    onMouseEnter={() => setIsHoveringDescription(true)}
-                    onMouseLeave={() => setIsHoveringDescription(false)}
-                    className="text-sm text-gray-600 cursor-pointer p-3 rounded whitespace-pre-line transition-all"
-                    style={{
-                      border: isHoveringDescription
-                        ? "1px dashed rgb(255, 106, 0)"
-                        : "none",
-                    }}
-                  >
-                    {block.description}
-                  </p>
-                )}
-                {editMode === "description" && (
-                  <SectionToolbar sectionType="description" />
-                )}
-              </div>
+              {(block.description || editMode === "description") && (
+                <div>
+                  {editMode === "description" ? (
+                    <textarea
+                      value={block.description}
+                      onChange={(e) =>
+                        handleFieldChange("description", e.target.value)
+                      }
+                      onBlur={() => setEditMode(null)}
+                      autoFocus
+                      className="w-full resize-none"
+                      style={{
+                        padding: "1rem",
+                        borderRadius: "0.5rem",
+                        fontSize: "0.875rem",
+                        color: "rgb(55, 65, 81)",
+                        minHeight: "6rem",
+                        border: "2px solid rgb(255, 106, 0)",
+                        boxSizing: "border-box",
+                        outline: "none",
+                        backgroundColor: "white",
+                      }}
+                    />
+                  ) : (
+                    <p
+                      onClick={() => setEditMode("description")}
+                      onMouseEnter={() => setIsHoveringDescription(true)}
+                      onMouseLeave={() => setIsHoveringDescription(false)}
+                      className="text-sm text-gray-600 cursor-pointer p-3 rounded whitespace-pre-line transition-all"
+                      style={{
+                        border: isHoveringDescription
+                          ? "1px dashed rgb(255, 106, 0)"
+                          : "none",
+                      }}
+                    >
+                      {block.description}
+                    </p>
+                  )}
+                  {editMode === "description" && (
+                    <SectionToolbar sectionType="description" />
+                  )}
+                </div>
+              )}
 
-              <div>
-                {editMode === "buttonText" ? (
-                  <Input
-                    value={block.buttonText}
-                    onChange={(e) =>
-                      handleFieldChange("buttonText", e.target.value)
-                    }
-                    onBlur={() => setEditMode(null)}
-                    autoFocus
-                    className="focus:outline-none"
-                    style={{ border: "2px solid rgb(255, 106, 0)" }}
-                  />
-                ) : (
-                  <button
-                    onClick={() => setEditMode("buttonText")}
-                    onMouseEnter={() => setIsHoveringButton(true)}
-                    onMouseLeave={() => setIsHoveringButton(false)}
-                    className="py-2 px-4 bg-valasys-orange text-white rounded text-sm font-bold hover:bg-orange-600 cursor-pointer transition-all"
-                    style={{
-                      border: isHoveringButton ? "1px dashed white" : "none",
-                    }}
-                  >
-                    {block.buttonText}
-                  </button>
-                )}
-                {editMode === "buttonText" && (
-                  <SectionToolbar sectionType="buttonText" />
-                )}
-              </div>
+              {(block.buttonText || editMode === "buttonText") && (
+                <div>
+                  {editMode === "buttonText" ? (
+                    <Input
+                      value={block.buttonText}
+                      onChange={(e) =>
+                        handleFieldChange("buttonText", e.target.value)
+                      }
+                      onBlur={() => setEditMode(null)}
+                      autoFocus
+                      className="focus:outline-none"
+                      style={{ border: "2px solid rgb(255, 106, 0)" }}
+                    />
+                  ) : (
+                    <button
+                      onClick={() => setEditMode("buttonText")}
+                      onMouseEnter={() => setIsHoveringButton(true)}
+                      onMouseLeave={() => setIsHoveringButton(false)}
+                      className="py-2 px-4 bg-valasys-orange text-white rounded text-sm font-bold hover:bg-orange-600 cursor-pointer transition-all"
+                      style={{
+                        border: isHoveringButton ? "1px dashed white" : "none",
+                      }}
+                    >
+                      {block.buttonText}
+                    </button>
+                  )}
+                  {editMode === "buttonText" && (
+                    <SectionToolbar sectionType="buttonText" />
+                  )}
+                </div>
+              )}
 
-              <div>
-                {editMode === "buttonLink" ? (
-                  <Input
-                    value={block.buttonLink}
-                    onChange={(e) =>
-                      handleFieldChange("buttonLink", e.target.value)
-                    }
-                    onBlur={() => setEditMode(null)}
-                    autoFocus
-                    placeholder="https://example.com"
-                    className="text-sm focus:outline-none"
-                    style={{ border: "2px solid rgb(255, 106, 0)" }}
-                  />
-                ) : (
-                  <p
-                    onClick={() => setEditMode("buttonLink")}
-                    onMouseEnter={() => setIsHoveringButtonLink(true)}
-                    onMouseLeave={() => setIsHoveringButtonLink(false)}
-                    className="text-xs text-gray-500 cursor-pointer p-3 rounded break-all transition-all"
-                    style={{
-                      border: isHoveringButtonLink
-                        ? "1px dashed rgb(255, 106, 0)"
-                        : "none",
-                    }}
-                  >
-                    {block.buttonLink || "#"}
-                  </p>
-                )}
-                {editMode === "buttonLink" && (
-                  <SectionToolbar sectionType="buttonLink" />
-                )}
-              </div>
+              {(block.buttonLink || editMode === "buttonLink") && (
+                <div>
+                  {editMode === "buttonLink" ? (
+                    <Input
+                      value={block.buttonLink}
+                      onChange={(e) =>
+                        handleFieldChange("buttonLink", e.target.value)
+                      }
+                      onBlur={() => setEditMode(null)}
+                      autoFocus
+                      placeholder="https://example.com"
+                      className="text-sm focus:outline-none"
+                      style={{ border: "2px solid rgb(255, 106, 0)" }}
+                    />
+                  ) : (
+                    <p
+                      onClick={() => setEditMode("buttonLink")}
+                      onMouseEnter={() => setIsHoveringButtonLink(true)}
+                      onMouseLeave={() => setIsHoveringButtonLink(false)}
+                      className="text-xs text-gray-500 cursor-pointer p-3 rounded break-all transition-all"
+                      style={{
+                        border: isHoveringButtonLink
+                          ? "1px dashed rgb(255, 106, 0)"
+                          : "none",
+                      }}
+                    >
+                      {block.buttonLink || "#"}
+                    </p>
+                  )}
+                  {editMode === "buttonLink" && (
+                    <SectionToolbar sectionType="buttonLink" />
+                  )}
+                </div>
+              )}
             </div>
           </div>
 
