@@ -46,6 +46,10 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
   onBlockSelect,
   onEditingBlockChange,
   onFooterElementSelect,
+  onAddBlock,
+  onDuplicate,
+  onDelete,
+  blockIndex = 0,
 }) => {
   const handleClick = () => {
     onBlockSelect?.(block.id);
