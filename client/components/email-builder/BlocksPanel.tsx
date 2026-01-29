@@ -383,6 +383,8 @@ const SectionsPanel: React.FC<SectionsPanelProps> = ({ onAddBlock }) => {
                         key={template.id}
                         template={template}
                         onAddBlocks={handleAddBlocks}
+                        isSelected={selectedTemplateId === template.id}
+                        onSelect={setSelectedTemplateId}
                       />
                     ))}
                   </div>
