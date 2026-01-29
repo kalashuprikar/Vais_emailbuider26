@@ -28,14 +28,8 @@ export const HeaderBlockComponent: React.FC<HeaderBlockComponentProps> = ({
       reader.onload = (event) => {
         const result = event.target?.result as string;
         if (result) {
-          console.log("✅ Header image loaded successfully");
           onLogoChange(result);
-        } else {
-          console.error("❌ Failed to read image data");
         }
-      };
-      reader.onerror = () => {
-        console.error("❌ Failed to read image file");
       };
       reader.readAsDataURL(file);
     }

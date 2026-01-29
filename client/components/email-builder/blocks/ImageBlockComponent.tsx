@@ -58,13 +58,18 @@ export const ImageBlockComponent: React.FC<ImageBlockComponentProps> = ({
 
     const handleMouseMove = (e: MouseEvent) => {
       const deltaX = e.clientX - startX;
-      let newWidth = Math.max(50, startWidth + deltaX); // Minimum width of 50px
+      let newWidth: number;
 
-      // Apply constraints based on width unit
+      // Handle different width units properly
       if (block.widthUnit === "%") {
-        newWidth = Math.min(100, newWidth); // Max 100% for percentage
+        // For percentage, convert pixel delta to percentage
+        const containerWidth =
+          containerRef.current?.getBoundingClientRect().width || 600;
+        const deltaPercent = (deltaX / containerWidth) * 100;
+        newWidth = Math.max(10, Math.min(100, startWidth + deltaPercent)); // Min 10%, Max 100%
       } else {
-        newWidth = Math.min(800, newWidth); // Max 800px for pixel width
+        // For pixels, directly add pixel delta
+        newWidth = Math.max(50, Math.min(800, startWidth + deltaX)); // Min 50px, Max 800px
       }
 
       onDimensionChange(newWidth, block.height);

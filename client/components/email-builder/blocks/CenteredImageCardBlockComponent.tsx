@@ -9,23 +9,12 @@ interface CenteredImageCardBlockComponentProps {
   block: CenteredImageCardBlock;
   isSelected: boolean;
   onBlockUpdate: (block: CenteredImageCardBlock) => void;
-  onAddBlock?: (block: ContentBlock, position: number) => void;
-  onDuplicate?: (block: ContentBlock, position: number) => void;
-  onDelete?: (blockId: string) => void;
   blockIndex?: number;
 }
 
 export const CenteredImageCardBlockComponent: React.FC<
   CenteredImageCardBlockComponentProps
-> = ({
-  block,
-  isSelected,
-  onBlockUpdate,
-  onAddBlock,
-  onDuplicate,
-  onDelete,
-  blockIndex = 0,
-}) => {
+> = ({ block, isSelected, onBlockUpdate, blockIndex = 0 }) => {
   const [editMode, setEditMode] = useState<string | null>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,38 +47,24 @@ export const CenteredImageCardBlockComponent: React.FC<
       else if (sectionType === "buttonText") contentToCopy = block.buttonText;
       else if (sectionType === "image") contentToCopy = block.image;
 
-      if (contentToCopy) {
-        try {
-          // Use the modern clipboard API
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard
-              .writeText(contentToCopy)
-              .then(() => {
-                console.log("Copied successfully:", contentToCopy);
-              })
-              .catch((err) => {
-                console.error("Failed to copy:", err);
-                // Fallback to older method
-                const textArea = document.createElement("textarea");
-                textArea.value = contentToCopy;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand("copy");
-                document.body.removeChild(textArea);
-              });
-          } else {
-            // Fallback for older browsers
-            const textArea = document.createElement("textarea");
-            textArea.value = contentToCopy;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand("copy");
-            document.body.removeChild(textArea);
-            console.log("Copied using fallback method:", contentToCopy);
-          }
-        } catch (err) {
-          console.error("Copy failed:", err);
-        }
+      if (!contentToCopy) {
+        return;
+      }
+
+      try {
+        // Use fallback method that's more compatible
+        const textArea = document.createElement("textarea");
+        textArea.value = contentToCopy;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        textArea.style.top = "-9999px";
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+      } catch (err) {
+        // Silently fail if copy doesn't work
+        console.error("Copy failed:", err);
       }
     };
 
@@ -221,75 +196,81 @@ export const CenteredImageCardBlockComponent: React.FC<
         </div>
 
         <div className="space-y-4 text-center">
-          <div>
-            {editMode === "title" ? (
-              <Input
-                value={block.title}
-                onChange={(e) => handleFieldChange("title", e.target.value)}
-                onBlur={() => setEditMode(null)}
-                autoFocus
-                className="text-center font-bold text-lg"
-              />
-            ) : (
-              <h3
-                onClick={() => setEditMode("title")}
-                className="font-bold text-xl text-gray-900 cursor-pointer transition-all p-2 rounded hover:border-2 hover:border-dotted hover:border-gray-400"
-              >
-                {block.title}
-              </h3>
-            )}
-            {editMode === "title" && <SectionToolbar sectionType="title" />}
-          </div>
-
-          <div>
-            {editMode === "description" ? (
-              <textarea
-                value={block.description}
-                onChange={(e) =>
-                  handleFieldChange("description", e.target.value)
-                }
-                onBlur={() => setEditMode(null)}
-                autoFocus
-                className="w-full p-2 rounded text-sm text-gray-600 min-h-24 border border-dotted border-valasys-orange focus:outline-none focus:ring-2 focus:ring-valasys-orange focus:border-transparent"
-              />
-            ) : (
-              <p
-                onClick={() => setEditMode("description")}
-                className="text-sm text-gray-600 cursor-pointer transition-all p-2 rounded whitespace-pre-wrap break-words hover:border-2 hover:border-dotted hover:border-gray-400"
-              >
-                {block.description}
-              </p>
-            )}
-            {editMode === "description" && (
-              <SectionToolbar sectionType="description" />
-            )}
-          </div>
-
-          <div className="pt-2">
-            {editMode === "buttonText" ? (
-              <Input
-                value={block.buttonText}
-                onChange={(e) =>
-                  handleFieldChange("buttonText", e.target.value)
-                }
-                onBlur={() => setEditMode(null)}
-                autoFocus
-                className="text-center"
-              />
-            ) : (
-              <div className="flex justify-center">
-                <button
-                  onClick={() => setEditMode("buttonText")}
-                  className="inline-block py-2 px-6 bg-valasys-orange text-white rounded text-sm font-bold hover:bg-orange-600 cursor-pointer transition-all hover:border-2 hover:border-dotted hover:border-gray-400"
+          {(block.title || editMode === "title") && (
+            <div>
+              {editMode === "title" ? (
+                <Input
+                  value={block.title}
+                  onChange={(e) => handleFieldChange("title", e.target.value)}
+                  onBlur={() => setEditMode(null)}
+                  autoFocus
+                  className="text-center font-bold text-lg"
+                />
+              ) : (
+                <h3
+                  onClick={() => setEditMode("title")}
+                  className="font-bold text-xl text-gray-900 cursor-pointer transition-all p-2 rounded hover:border-2 hover:border-dotted hover:border-gray-400"
                 >
-                  {block.buttonText}
-                </button>
-              </div>
-            )}
-            {editMode === "buttonText" && (
-              <SectionToolbar sectionType="buttonText" />
-            )}
-          </div>
+                  {block.title}
+                </h3>
+              )}
+              {editMode === "title" && <SectionToolbar sectionType="title" />}
+            </div>
+          )}
+
+          {(block.description || editMode === "description") && (
+            <div>
+              {editMode === "description" ? (
+                <textarea
+                  value={block.description}
+                  onChange={(e) =>
+                    handleFieldChange("description", e.target.value)
+                  }
+                  onBlur={() => setEditMode(null)}
+                  autoFocus
+                  className="w-full p-2 rounded text-sm text-gray-600 min-h-24 border border-dotted border-valasys-orange focus:outline-none focus:ring-2 focus:ring-valasys-orange focus:border-transparent"
+                />
+              ) : (
+                <p
+                  onClick={() => setEditMode("description")}
+                  className="text-sm text-gray-600 cursor-pointer transition-all p-2 rounded whitespace-pre-wrap break-words hover:border-2 hover:border-dotted hover:border-gray-400"
+                >
+                  {block.description}
+                </p>
+              )}
+              {editMode === "description" && (
+                <SectionToolbar sectionType="description" />
+              )}
+            </div>
+          )}
+
+          {(block.buttonText || editMode === "buttonText") && (
+            <div className="pt-2">
+              {editMode === "buttonText" ? (
+                <Input
+                  value={block.buttonText}
+                  onChange={(e) =>
+                    handleFieldChange("buttonText", e.target.value)
+                  }
+                  onBlur={() => setEditMode(null)}
+                  autoFocus
+                  className="text-center"
+                />
+              ) : (
+                <div className="flex justify-center">
+                  <button
+                    onClick={() => setEditMode("buttonText")}
+                    className="inline-block py-2 px-6 bg-valasys-orange text-white rounded text-sm font-bold hover:bg-orange-600 cursor-pointer transition-all hover:border-2 hover:border-dotted hover:border-gray-400"
+                  >
+                    {block.buttonText}
+                  </button>
+                </div>
+              )}
+              {editMode === "buttonText" && (
+                <SectionToolbar sectionType="buttonText" />
+              )}
+            </div>
+          )}
 
           {editMode === "buttonLink" && (
             <div>

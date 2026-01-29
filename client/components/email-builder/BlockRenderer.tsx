@@ -215,9 +215,6 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
             block={block as any}
             isSelected={isSelected}
             onBlockUpdate={(updatedBlock) => onBlockUpdate(updatedBlock)}
-            onAddBlock={onAddBlock}
-            onDuplicate={onDuplicate}
-            onDelete={onDelete}
             blockIndex={blockIndex}
           />
         </div>
