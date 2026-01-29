@@ -40,6 +40,7 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
   selectedFooterElement,
   onBlockUpdate,
   onBlockSelect,
+  onEditingBlockChange,
   onFooterElementSelect,
 }) => {
   const handleClick = () => {
