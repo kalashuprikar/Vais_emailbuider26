@@ -16,7 +16,7 @@ export const FeaturesBlockComponent: React.FC<FeaturesBlockComponentProps> = ({
 
   return (
     <div
-      className={`w-full rounded-lg overflow-hidden transition-all ${
+      className={`w-full rounded-lg overflow-hidden ${
         isSelected ? "ring-2 ring-valasys-orange" : ""
       }`}
       dangerouslySetInnerHTML={{ __html: html }}
