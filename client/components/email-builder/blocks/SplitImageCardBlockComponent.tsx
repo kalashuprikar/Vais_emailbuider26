@@ -128,7 +128,7 @@ export const SplitImageCardBlockComponent: React.FC<
                 ) : (
                   <p
                     onClick={() => setEditMode("description")}
-                    className="text-sm text-gray-600 cursor-pointer hover:text-valasys-orange p-2 rounded hover:bg-orange-50 whitespace-pre-line"
+                    className="text-sm text-gray-600 cursor-pointer p-2 rounded whitespace-pre-line"
                   >
                     {block.description}
                   </p>
