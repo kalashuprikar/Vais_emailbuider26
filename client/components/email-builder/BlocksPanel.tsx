@@ -152,9 +152,7 @@ const DraggableTemplateCard: React.FC<DraggableTemplateProps> = ({
     <div
       ref={drag}
       className={`flex flex-col rounded-lg overflow-hidden transition-all cursor-move bg-white ${
-        isSelected
-          ? "border-2 border-valasys-orange"
-          : "border border-gray-200"
+        isSelected ? "border-2 border-valasys-orange" : "border border-gray-200"
       } ${isDragging ? "opacity-50" : ""}`}
     >
       <div className="w-full h-40 overflow-hidden">
@@ -191,7 +189,9 @@ const SectionsPanel: React.FC<SectionsPanelProps> = ({ onAddBlock }) => {
       "Footer & signatures",
     ]),
   );
-  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(null);
+  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(
+    null,
+  );
 
   const textImageTemplates: Template[] = [
     {
