@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SplitImageCardBlock } from "../types";
-import { Upload } from "lucide-react";
+import { Upload, Copy, Trash2, Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -18,6 +18,7 @@ export const SplitImageCardBlockComponent: React.FC<
   const [isHoveringDescription, setIsHoveringDescription] = useState(false);
   const [isHoveringButton, setIsHoveringButton] = useState(false);
   const [isHoveringButtonLink, setIsHoveringButtonLink] = useState(false);
+  const [isHoveringImage, setIsHoveringImage] = useState(false);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -44,6 +45,112 @@ export const SplitImageCardBlockComponent: React.FC<
     });
   };
 
+  const SectionToolbar = ({
+    sectionType,
+  }: {
+    sectionType: "image" | "title" | "description" | "buttonText" | "buttonLink";
+  }) => {
+    const handleCopy = () => {
+      let contentToCopy = "";
+      if (sectionType === "title") contentToCopy = block.title;
+      else if (sectionType === "description") contentToCopy = block.description;
+      else if (sectionType === "buttonText") contentToCopy = block.buttonText;
+      else if (sectionType === "buttonLink") contentToCopy = block.buttonLink;
+      else if (sectionType === "image") contentToCopy = block.image;
+
+      if (!contentToCopy) {
+        return;
+      }
+
+      try {
+        const textArea = document.createElement("textarea");
+        textArea.value = contentToCopy;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        textArea.style.top = "-9999px";
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+      } catch (err) {
+        console.error("Copy failed:", err);
+      }
+    };
+
+    const handleDelete = () => {
+      if (sectionType === "title") {
+        onBlockUpdate({ ...block, title: "" });
+        setEditMode(null);
+      } else if (sectionType === "description") {
+        onBlockUpdate({ ...block, description: "" });
+        setEditMode(null);
+      } else if (sectionType === "buttonText") {
+        onBlockUpdate({ ...block, buttonText: "" });
+        setEditMode(null);
+      } else if (sectionType === "buttonLink") {
+        onBlockUpdate({ ...block, buttonLink: "" });
+        setEditMode(null);
+      } else if (sectionType === "image") {
+        onBlockUpdate({ ...block, image: "" });
+        setEditMode(null);
+      }
+    };
+
+    const handleAdd = () => {
+      if (sectionType === "title" || sectionType === "description") {
+        setEditMode(sectionType);
+      }
+    };
+
+    return (
+      <div
+        className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-2 shadow-sm mt-2 w-fit"
+        onMouseDown={(e) => e.preventDefault()}
+      >
+        {sectionType !== "image" && (
+          <Button
+            variant="ghost"
+            size="sm"
+            className="h-7 w-7 p-0 hover:bg-gray-100"
+            title="Add"
+            onMouseDown={(e) => {
+              e.preventDefault();
+              handleAdd();
+            }}
+          >
+            <Plus className="w-3 h-3 text-gray-700" />
+          </Button>
+        )}
+
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-7 w-7 p-0 hover:bg-gray-100"
+          title="Copy"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleCopy();
+          }}
+        >
+          <Copy className="w-3 h-3 text-gray-700" />
+        </Button>
+
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-7 w-7 p-0 hover:bg-red-100"
+          title="Delete"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleDelete();
+          }}
+        >
+          <Trash2 className="w-3 h-3 text-red-600" />
+        </Button>
+      </div>
+    );
+  };
+
   const isImageLeft = block.imagePosition === "left";
 
   return (
@@ -59,7 +166,10 @@ export const SplitImageCardBlockComponent: React.FC<
       <div className="max-w-2xl mx-auto">
         <div className="flex flex-col md:flex-row gap-4 items-stretch">
           {isImageLeft && (
-            <div className="md:w-2/5 relative group">
+            <div className="md:w-2/5 relative group"
+              onMouseEnter={() => block.image && setIsHoveringImage(true)}
+              onMouseLeave={() => setIsHoveringImage(false)}
+            >
               {block.image ? (
                 <>
                   <img
@@ -91,6 +201,7 @@ export const SplitImageCardBlockComponent: React.FC<
                   />
                 </label>
               )}
+              {isHoveringImage && <SectionToolbar sectionType="image" />}
             </div>
           )}
 
@@ -121,6 +232,7 @@ export const SplitImageCardBlockComponent: React.FC<
                     {block.title}
                   </p>
                 )}
+                {editMode === "title" && <SectionToolbar sectionType="title" />}
               </div>
 
               <div>
@@ -160,6 +272,9 @@ export const SplitImageCardBlockComponent: React.FC<
                     {block.description}
                   </p>
                 )}
+                {editMode === "description" && (
+                  <SectionToolbar sectionType="description" />
+                )}
               </div>
 
               <div>
@@ -186,6 +301,9 @@ export const SplitImageCardBlockComponent: React.FC<
                   >
                     {block.buttonText}
                   </button>
+                )}
+                {editMode === "buttonText" && (
+                  <SectionToolbar sectionType="buttonText" />
                 )}
               </div>
 
@@ -217,12 +335,18 @@ export const SplitImageCardBlockComponent: React.FC<
                     {block.buttonLink || "#"}
                   </p>
                 )}
+                {editMode === "buttonLink" && (
+                  <SectionToolbar sectionType="buttonLink" />
+                )}
               </div>
             </div>
           </div>
 
           {!isImageLeft && (
-            <div className="md:w-2/5 relative group">
+            <div className="md:w-2/5 relative group"
+              onMouseEnter={() => block.image && setIsHoveringImage(true)}
+              onMouseLeave={() => setIsHoveringImage(false)}
+            >
               {block.image ? (
                 <>
                   <img
@@ -254,6 +378,7 @@ export const SplitImageCardBlockComponent: React.FC<
                   />
                 </label>
               )}
+              {isHoveringImage && <SectionToolbar sectionType="image" />}
             </div>
           )}
         </div>
