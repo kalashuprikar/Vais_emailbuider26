@@ -253,30 +253,23 @@ export const SplitImageCardBlockComponent: React.FC<
             <div className="space-y-3 p-4">
               <div>
                 {editMode === "title" ? (
-                  <Input
-                    value={block.title}
-                    onChange={(e) => handleFieldChange("title", e.target.value)}
-                    onBlur={() => setEditMode(null)}
-                    autoFocus
-                    className="font-bold text-lg border-2 border-solid border-valasys-orange focus:outline-none"
-                  />
-                ) : (
                   <>
-                    <p
-                      onClick={() => setEditMode("title")}
-                      onMouseEnter={() => setIsHoveringTitle(true)}
-                      onMouseLeave={() => setIsHoveringTitle(false)}
-                      className="font-bold text-lg text-gray-900 cursor-pointer p-3 rounded transition-all"
-                      style={{
-                        border: isHoveringTitle
-                          ? "2px dashed rgb(255, 106, 0)"
-                          : "none",
-                      }}
-                    >
-                      {block.title}
-                    </p>
-                    {isHoveringTitle && <SectionToolbar sectionType="title" />}
+                    <Input
+                      value={block.title}
+                      onChange={(e) => handleFieldChange("title", e.target.value)}
+                      onBlur={() => setEditMode(null)}
+                      autoFocus
+                      className="font-bold text-lg border-2 border-solid border-valasys-orange focus:outline-none"
+                    />
+                    <SectionToolbar sectionType="title" />
                   </>
+                ) : (
+                  <p
+                    onClick={() => setEditMode("title")}
+                    className="font-bold text-lg text-gray-900 cursor-pointer p-3 rounded transition-all border border-transparent hover:border-gray-300"
+                  >
+                    {block.title}
+                  </p>
                 )}
               </div>
 
