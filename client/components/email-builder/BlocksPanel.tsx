@@ -126,6 +126,7 @@ const DraggableTemplateCard: React.FC<DraggableTemplateProps> = ({
   template,
   onAddBlocks,
 }) => {
+  const [isSelected, setIsSelected] = React.useState(false);
   const [{ isDragging }, drag] = useDrag(
     () => ({
       type: "template",
@@ -139,12 +140,19 @@ const DraggableTemplateCard: React.FC<DraggableTemplateProps> = ({
     [template],
   );
 
+  const handleClick = () => {
+    setIsSelected(true);
+    onAddBlocks(template.blocks());
+  };
+
   return (
     <div
       ref={drag}
-      className={`flex flex-col border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow cursor-move ${
-        isDragging ? "opacity-50" : ""
-      }`}
+      className={`flex flex-col rounded-lg overflow-hidden transition-all cursor-move ${
+        isSelected
+          ? "border border-gray-900"
+          : "border border-gray-200 hover:border-dashed hover:border-gray-400"
+      } ${isDragging ? "opacity-50" : ""}`}
     >
       <div className="w-full h-32 bg-gray-200 overflow-hidden">
         <img
@@ -161,7 +169,7 @@ const DraggableTemplateCard: React.FC<DraggableTemplateProps> = ({
           {template.description}
         </p>
         <button
-          onClick={() => onAddBlocks(template.blocks())}
+          onClick={handleClick}
           className="w-full px-3 py-2 bg-valasys-orange text-white text-xs font-medium rounded hover:bg-orange-600 transition-colors"
         >
           Use template
