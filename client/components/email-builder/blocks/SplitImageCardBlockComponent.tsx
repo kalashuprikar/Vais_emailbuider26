@@ -68,43 +68,61 @@ export const SplitImageCardBlockComponent: React.FC<
     sectionType: "image" | "title" | "description" | "buttonText" | "buttonLink";
   }) => {
     const handleCopy = () => {
-      console.log("Copy button clicked for:", sectionType);
-
-      if (sectionType === "title" && block.title) {
-        const newTitle = block.title + "\n" + block.title;
-        onBlockUpdate({ ...block, title: newTitle });
-        console.log("Title duplicated");
-      } else if (sectionType === "description" && block.description) {
-        const newDescription = block.description + "\n" + block.description;
-        onBlockUpdate({ ...block, description: newDescription });
-        console.log("Description duplicated");
-      } else if (sectionType === "buttonText" && block.buttonText) {
-        const newButtonText = block.buttonText + " " + block.buttonText;
-        onBlockUpdate({ ...block, buttonText: newButtonText });
-        console.log("Button text duplicated");
-      } else if (sectionType === "buttonLink" && block.buttonLink) {
-        try {
-          const textArea = document.createElement("textarea");
-          textArea.value = block.buttonLink;
-          document.body.appendChild(textArea);
-          textArea.select();
-          document.execCommand("copy");
-          document.body.removeChild(textArea);
-          console.log("Link copied");
-        } catch (err) {
-          console.error("Copy failed:", err);
+      if (sectionType === "title") {
+        if (block.title) {
+          const newTitle = block.title + "\n" + block.title;
+          onBlockUpdate({ ...block, title: newTitle });
+          toast.success("Title duplicated!");
+        } else {
+          toast.error("Title is empty");
         }
-      } else if (sectionType === "image" && block.image) {
-        try {
-          const textArea = document.createElement("textarea");
-          textArea.value = block.image;
-          document.body.appendChild(textArea);
-          textArea.select();
-          document.execCommand("copy");
-          document.body.removeChild(textArea);
-          console.log("Image URL copied");
-        } catch (err) {
-          console.error("Copy failed:", err);
+      } else if (sectionType === "description") {
+        if (block.description) {
+          const newDescription = block.description + "\n" + block.description;
+          onBlockUpdate({ ...block, description: newDescription });
+          toast.success("Description duplicated!");
+        } else {
+          toast.error("Description is empty");
+        }
+      } else if (sectionType === "buttonText") {
+        if (block.buttonText) {
+          const newButtonText = block.buttonText + " " + block.buttonText;
+          onBlockUpdate({ ...block, buttonText: newButtonText });
+          toast.success("Button text duplicated!");
+        } else {
+          toast.error("Button text is empty");
+        }
+      } else if (sectionType === "buttonLink") {
+        if (block.buttonLink) {
+          try {
+            const textArea = document.createElement("textarea");
+            textArea.value = block.buttonLink;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+            toast.success("Link copied to clipboard!");
+          } catch (err) {
+            toast.error("Failed to copy link");
+          }
+        } else {
+          toast.error("Link is empty");
+        }
+      } else if (sectionType === "image") {
+        if (block.image) {
+          try {
+            const textArea = document.createElement("textarea");
+            textArea.value = block.image;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+            toast.success("Image URL copied!");
+          } catch (err) {
+            toast.error("Failed to copy image URL");
+          }
+        } else {
+          toast.error("Image URL is empty");
         }
       }
     };
