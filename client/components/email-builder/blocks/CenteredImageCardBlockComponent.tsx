@@ -479,7 +479,7 @@ export const CenteredImageCardBlockComponent: React.FC<
                   onBlur={() => setEditMode(null)}
                   autoFocus
                   placeholder="https://example.com"
-                  className="text-sm text-center"
+                  className="text-sm text-center border-2 border-solid border-valasys-orange focus:outline-none"
                 />
               ) : (
                 <p
