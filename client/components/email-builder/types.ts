@@ -370,6 +370,9 @@ export interface CenteredImageCardBlock {
   buttonText: string;
   buttonLink: string;
   buttonLinkType?: "url" | "page" | "email";
+  titles?: Array<{ id: string; content: string }>;
+  descriptions?: Array<{ id: string; content: string }>;
+  buttons?: Array<{ id: string; text: string; link: string }>;
   backgroundColor: string;
   borderColor: string;
   borderWidth: number;
