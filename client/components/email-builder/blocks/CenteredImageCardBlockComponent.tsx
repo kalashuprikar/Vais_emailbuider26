@@ -10,9 +10,6 @@ interface CenteredImageCardBlockComponentProps {
   block: CenteredImageCardBlock;
   isSelected: boolean;
   onBlockUpdate: (block: CenteredImageCardBlock) => void;
-  blockIndex?: number;
-  onDuplicate?: (block: CenteredImageCardBlock, position: number) => void;
-  onDelete?: () => void;
 }
 
 export const CenteredImageCardBlockComponent: React.FC<
