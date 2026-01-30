@@ -136,6 +136,36 @@ export const ImageBlockComponent: React.FC<ImageBlockComponentProps> = ({
               (e.target as HTMLImageElement).style.border = "2px solid red";
             }}
           />
+
+          {/* Hover Toolbar */}
+          {isHovering && (
+            <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-2 items-center bg-white border border-gray-300 rounded-lg p-2 shadow-lg z-20">
+              {onDuplicate && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDuplicate(block, blockIndex + 1);
+                  }}
+                  className="text-gray-700 hover:text-blue-600 transition-colors p-1"
+                  title="Copy block"
+                >
+                  <Copy className="w-4 h-4" />
+                </button>
+              )}
+              {onDelete && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDelete(block.id);
+                  }}
+                  className="text-gray-700 hover:text-red-600 transition-colors p-1"
+                  title="Delete block"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+          )}
           {/* Resize Handle */}
           {isSelected && (
             <div
