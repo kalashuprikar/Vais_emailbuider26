@@ -81,37 +81,15 @@ export const SplitImageCardBlockComponent: React.FC<
     sectionType: "title" | "description" | "buttonText" | "buttonLink";
   }) => {
     const handleCopy = () => {
-      let contentToCopy = "";
-      let successMessage = "";
-
-      if (sectionType === "title") {
-        contentToCopy = block.title;
-        successMessage = "Title copied to clipboard!";
-      } else if (sectionType === "description") {
-        contentToCopy = block.description;
-        successMessage = "Description copied to clipboard!";
-      } else if (sectionType === "buttonText") {
-        contentToCopy = block.buttonText;
-        successMessage = "Button text copied to clipboard!";
-      } else if (sectionType === "buttonLink") {
-        contentToCopy = block.buttonLink;
-        successMessage = "Button link copied to clipboard!";
-      }
-
-      if (!contentToCopy) {
-        toast.error("Content is empty");
+      if (!onDuplicate) {
+        toast.error("Duplication not available");
         return;
       }
 
-      try {
-        navigator.clipboard.writeText(contentToCopy).then(() => {
-          toast.success(successMessage);
-        }).catch(() => {
-          toast.error("Failed to copy");
-        });
-      } catch (err) {
-        toast.error("Failed to copy");
-      }
+      // Duplicate the entire block
+      onDuplicate(block, blockIndex + 1);
+      toast.success("Block duplicated!");
+      setEditMode(null);
     };
 
     const handleDelete = () => {
