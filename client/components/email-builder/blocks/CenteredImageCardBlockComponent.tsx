@@ -497,40 +497,18 @@ export const CenteredImageCardBlockComponent: React.FC<
               </div>
             </>
           ) : (
-            <div className="space-y-2">
-              <label className="flex items-center justify-center w-full h-40 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
-                <div className="flex flex-col items-center justify-center">
-                  <Upload className="w-6 h-6 text-gray-400 mb-2" />
-                  <p className="text-sm text-gray-500">Click to upload</p>
-                </div>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  className="hidden"
-                />
-              </label>
-              <div className="flex gap-2">
-                <Input
-                  type="text"
-                  placeholder="Or paste image URL..."
-                  value={imageUrlInput}
-                  onChange={(e) => setImageUrlInput(e.target.value)}
-                  onKeyPress={(e) =>
-                    e.key === "Enter" && handleImageUrlSubmit()
-                  }
-                  className="flex-1 text-xs"
-                />
-                <Button
-                  onClick={handleImageUrlSubmit}
-                  variant="outline"
-                  size="sm"
-                  className="text-xs"
-                >
-                  Add
-                </Button>
+            <label className="flex items-center justify-center w-full h-40 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
+              <div className="flex flex-col items-center justify-center">
+                <Upload className="w-6 h-6 text-gray-400 mb-2" />
+                <p className="text-sm text-gray-500">Click to upload</p>
               </div>
-            </div>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="hidden"
+              />
+            </label>
           )}
         </div>
 
