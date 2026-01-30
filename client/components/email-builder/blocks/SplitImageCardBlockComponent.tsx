@@ -20,7 +20,6 @@ export const SplitImageCardBlockComponent: React.FC<
 > = ({ block, isSelected, onBlockUpdate, blockIndex = 0 }) => {
   const [editMode, setEditMode] = useState<string | null>(null);
   const [isHoveringImage, setIsHoveringImage] = useState(false);
-  const [imageUrlInput, setImageUrlInput] = useState("");
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
 
   // Initialize sections from old format or arrays
