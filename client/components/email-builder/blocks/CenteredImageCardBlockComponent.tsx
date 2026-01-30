@@ -396,19 +396,22 @@ export const CenteredImageCardBlockComponent: React.FC<
                   style={{ border: "2px solid rgb(255, 106, 0)" }}
                 />
               ) : (
-                <h3
-                  onClick={() => setEditMode("title")}
-                  onMouseEnter={() => setIsHoveringTitle(true)}
-                  onMouseLeave={() => setIsHoveringTitle(false)}
-                  className="font-bold text-xl text-gray-900 cursor-pointer transition-all p-3 rounded"
-                  style={{
-                    border: isHoveringTitle
-                      ? "1px dashed rgb(255, 106, 0)"
-                      : "none",
-                  }}
-                >
-                  {block.title}
-                </h3>
+                <>
+                  <h3
+                    onClick={() => setEditMode("title")}
+                    onMouseEnter={() => setIsHoveringTitle(true)}
+                    onMouseLeave={() => setIsHoveringTitle(false)}
+                    className="font-bold text-xl text-gray-900 cursor-pointer transition-all p-3 rounded"
+                    style={{
+                      border: isHoveringTitle
+                        ? "1px dashed rgb(255, 106, 0)"
+                        : "none",
+                    }}
+                  >
+                    {block.title}
+                  </h3>
+                  {isHoveringTitle && <SectionToolbar sectionType="title" />}
+                </>
               )}
             </div>
           )}
