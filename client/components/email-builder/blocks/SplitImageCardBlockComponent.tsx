@@ -345,18 +345,16 @@ export const SplitImageCardBlockComponent: React.FC<
                           className="hidden"
                         />
                       </label>
-                      {onDuplicate && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onDuplicate(block, blockIndex + 1);
-                          }}
-                          className="flex items-center justify-center cursor-pointer p-2 hover:bg-black hover:bg-opacity-60 rounded transition-all"
-                          title="Copy block"
-                        >
-                          <Copy className="w-6 h-6 text-white" />
-                        </button>
-                      )}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigator.clipboard.writeText(block.image);
+                        }}
+                        className="flex items-center justify-center cursor-pointer p-2 hover:bg-black hover:bg-opacity-60 rounded transition-all"
+                        title="Copy image URL"
+                      >
+                        <Copy className="w-6 h-6 text-white" />
+                      </button>
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -649,18 +647,16 @@ export const SplitImageCardBlockComponent: React.FC<
                           className="hidden"
                         />
                       </label>
-                      {onDuplicate && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onDuplicate(block, blockIndex + 1);
-                          }}
-                          className="flex items-center justify-center cursor-pointer p-2 hover:bg-black hover:bg-opacity-60 rounded transition-all"
-                          title="Copy block"
-                        >
-                          <Copy className="w-6 h-6 text-white" />
-                        </button>
-                      )}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigator.clipboard.writeText(block.image);
+                        }}
+                        className="flex items-center justify-center cursor-pointer p-2 hover:bg-black hover:bg-opacity-60 rounded transition-all"
+                        title="Copy image URL"
+                      >
+                        <Copy className="w-6 h-6 text-white" />
+                      </button>
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
