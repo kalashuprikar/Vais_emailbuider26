@@ -116,27 +116,60 @@ export const ImageBlockComponent: React.FC<ImageBlockComponentProps> = ({
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
-          <img
-            src={block.src}
-            alt={block.alt || "Image"}
-            crossOrigin="anonymous"
-            style={{
-              width: `${block.width || 100}${block.widthUnit || "px"}`,
-              height:
-                block.heightUnit === "%"
-                  ? `${block.height || 100}${block.heightUnit}`
-                  : `${block.height || "auto"}px`,
-              display: "block",
-              maxWidth: "100%",
-              objectFit: "contain",
-              boxSizing: "border-box",
-              userSelect: "none",
-            }}
-            onError={(e) => {
-              console.error("Image failed to load:", block.src);
-              (e.target as HTMLImageElement).style.border = "2px solid red";
-            }}
-          />
+          {(block as any).linkTarget ? (
+            <a
+              href={(block as any).linkTarget}
+              title={(block as any).linkTooltip || ""}
+              style={{
+                display: "inline-block",
+                textDecoration: "none",
+              }}
+            >
+              <img
+                src={block.src}
+                alt={block.alt || "Image"}
+                crossOrigin="anonymous"
+                style={{
+                  width: `${block.width || 100}${block.widthUnit || "px"}`,
+                  height:
+                    block.heightUnit === "%"
+                      ? `${block.height || 100}${block.heightUnit}`
+                      : `${block.height || "auto"}px`,
+                  display: "block",
+                  maxWidth: "100%",
+                  objectFit: "contain",
+                  boxSizing: "border-box",
+                  userSelect: "none",
+                }}
+                onError={(e) => {
+                  console.error("Image failed to load:", block.src);
+                  (e.target as HTMLImageElement).style.border = "2px solid red";
+                }}
+              />
+            </a>
+          ) : (
+            <img
+              src={block.src}
+              alt={block.alt || "Image"}
+              crossOrigin="anonymous"
+              style={{
+                width: `${block.width || 100}${block.widthUnit || "px"}`,
+                height:
+                  block.heightUnit === "%"
+                    ? `${block.height || 100}${block.heightUnit}`
+                    : `${block.height || "auto"}px`,
+                display: "block",
+                maxWidth: "100%",
+                objectFit: "contain",
+                boxSizing: "border-box",
+                userSelect: "none",
+              }}
+              onError={(e) => {
+                console.error("Image failed to load:", block.src);
+                (e.target as HTMLImageElement).style.border = "2px solid red";
+              }}
+            />
+          )}
 
           {/* Hover Toolbar */}
           {isHovering && (
