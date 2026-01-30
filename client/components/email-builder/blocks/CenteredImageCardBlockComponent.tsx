@@ -132,6 +132,123 @@ export const CenteredImageCardBlockComponent: React.FC<
     onBlockUpdate,
   ]);
 
+  const SectionToolbar = ({
+    sectionType,
+  }: {
+    sectionType: "image" | "title" | "description" | "buttonText" | "buttonLink";
+  }) => {
+    const handleCopy = () => {
+      let contentToCopy = "";
+      let successMessage = "";
+
+      if (sectionType === "title") {
+        contentToCopy = block.title;
+        successMessage = "Title copied to clipboard!";
+      } else if (sectionType === "description") {
+        contentToCopy = block.description;
+        successMessage = "Description copied to clipboard!";
+      } else if (sectionType === "buttonText") {
+        contentToCopy = block.buttonText;
+        successMessage = "Button text copied to clipboard!";
+      } else if (sectionType === "buttonLink") {
+        contentToCopy = block.buttonLink;
+        successMessage = "Button link copied to clipboard!";
+      } else if (sectionType === "image") {
+        contentToCopy = block.image;
+        successMessage = "Image URL copied to clipboard!";
+      }
+
+      if (!contentToCopy) {
+        toast.error("Content is empty");
+        return;
+      }
+
+      try {
+        navigator.clipboard.writeText(contentToCopy).then(() => {
+          toast.success(successMessage);
+        }).catch(() => {
+          toast.error("Failed to copy");
+        });
+      } catch (err) {
+        toast.error("Failed to copy");
+      }
+    };
+
+    const handleDelete = () => {
+      if (sectionType === "title") {
+        onBlockUpdate({ ...block, title: "" });
+        setEditMode(null);
+      } else if (sectionType === "description") {
+        onBlockUpdate({ ...block, description: "" });
+        setEditMode(null);
+      } else if (sectionType === "buttonText") {
+        onBlockUpdate({ ...block, buttonText: "" });
+        setEditMode(null);
+      } else if (sectionType === "buttonLink") {
+        onBlockUpdate({ ...block, buttonLink: "" });
+        setEditMode(null);
+      } else if (sectionType === "image") {
+        onBlockUpdate({ ...block, image: "" });
+        setEditMode(null);
+      }
+      toast.success("Deleted!");
+    };
+
+    const handleAdd = () => {
+      if (sectionType === "title" || sectionType === "description" || sectionType === "buttonText" || sectionType === "buttonLink") {
+        setEditMode(sectionType);
+      }
+    };
+
+    return (
+      <div
+        className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-2 shadow-sm mt-2 w-fit"
+        onMouseDown={(e) => e.preventDefault()}
+      >
+        {sectionType !== "image" && (
+          <Button
+            variant="ghost"
+            size="sm"
+            className="h-7 w-7 p-0 hover:bg-gray-100"
+            title="Add"
+            onMouseDown={(e) => {
+              e.preventDefault();
+              handleAdd();
+            }}
+          >
+            <Plus className="w-3 h-3 text-gray-700" />
+          </Button>
+        )}
+
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-7 w-7 p-0 hover:bg-gray-100"
+          title="Copy"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleCopy();
+          }}
+        >
+          <Copy className="w-3 h-3 text-gray-700" />
+        </Button>
+
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-7 w-7 p-0 hover:bg-red-100"
+          title="Delete"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleDelete();
+          }}
+        >
+          <Trash2 className="w-3 h-3 text-red-600" />
+        </Button>
+      </div>
+    );
+  };
+
   return (
     <div
       className="rounded-lg group transition-all"
