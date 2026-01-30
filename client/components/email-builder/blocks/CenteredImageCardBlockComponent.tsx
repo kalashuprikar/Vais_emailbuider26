@@ -497,34 +497,34 @@ export const CenteredImageCardBlockComponent: React.FC<
           {(block.buttonLink || editMode === "buttonLink") && (
             <div>
               {editMode === "buttonLink" ? (
-                <Input
-                  value={block.buttonLink}
-                  onChange={(e) =>
-                    handleFieldChange("buttonLink", e.target.value)
-                  }
-                  onBlur={() => setEditMode(null)}
-                  autoFocus
-                  placeholder="https://example.com"
-                  className="text-sm text-center focus:outline-none"
-                  style={{ border: "2px solid rgb(255, 106, 0)" }}
-                />
-              ) : (
                 <>
-                  <p
-                    onClick={() => setEditMode("buttonLink")}
-                    onMouseEnter={() => setIsHoveringButtonLink(true)}
-                    onMouseLeave={() => setIsHoveringButtonLink(false)}
-                    className="text-xs text-gray-500 cursor-pointer p-3 rounded break-all transition-all"
-                    style={{
-                      border: isHoveringButtonLink
-                        ? "1px dashed rgb(255, 106, 0)"
-                        : "none",
-                    }}
-                  >
-                    {block.buttonLink || "#"}
-                  </p>
-                  {isHoveringButtonLink && <SectionToolbar sectionType="buttonLink" />}
+                  <Input
+                    value={block.buttonLink}
+                    onChange={(e) =>
+                      handleFieldChange("buttonLink", e.target.value)
+                    }
+                    onBlur={() => setEditMode(null)}
+                    autoFocus
+                    placeholder="https://example.com"
+                    className="text-sm text-center focus:outline-none"
+                    style={{ border: "2px solid rgb(255, 106, 0)" }}
+                  />
+                  <SectionToolbar sectionType="buttonLink" />
                 </>
+              ) : (
+                <p
+                  onClick={() => setEditMode("buttonLink")}
+                  onMouseEnter={() => setIsHoveringButtonLink(true)}
+                  onMouseLeave={() => setIsHoveringButtonLink(false)}
+                  className="text-xs text-gray-500 cursor-pointer p-3 rounded break-all transition-all"
+                  style={{
+                    border: isHoveringButtonLink
+                      ? "1px dashed rgb(255, 106, 0)"
+                      : "none",
+                  }}
+                >
+                  {block.buttonLink || "#"}
+                </p>
               )}
             </div>
           )}
