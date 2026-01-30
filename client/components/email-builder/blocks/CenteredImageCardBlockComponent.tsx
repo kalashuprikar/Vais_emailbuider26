@@ -28,6 +28,7 @@ export const CenteredImageCardBlockComponent: React.FC<
   const [startHeight, setStartHeight] = useState(0);
   const [isHoveringImage, setIsHoveringImage] = useState(false);
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
+  const [imageUrlInput, setImageUrlInput] = useState("");
   const imageContainerRef = useRef<HTMLDivElement>(null);
 
   // Initialize sections from old format or arrays
