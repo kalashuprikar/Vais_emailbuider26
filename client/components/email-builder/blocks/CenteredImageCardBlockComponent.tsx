@@ -300,6 +300,7 @@ export const CenteredImageCardBlockComponent: React.FC<
     const newTitles = titles.filter((t) => t.id !== id);
     onBlockUpdate({ ...block, titles: newTitles });
     setEditMode(null);
+    setFocusedSection(null);
   };
 
   const handleDeleteDescription = (id: string) => {
