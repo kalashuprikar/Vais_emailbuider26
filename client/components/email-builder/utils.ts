@@ -941,7 +941,7 @@ export function renderBlockToHTML(block: ContentBlock): string {
                 <div style="height: 160px; overflow: hidden; flex-shrink: 0;">
                   ${imageHtml}
                 </div>
-                <div style="padding: ${contentPadding}px; margin: 0; border: none; flex: 1; overflow: auto;">
+                <div style="padding: ${contentPadding}px; margin: 0; border: none; flex: 1; overflow: hidden;">
                   <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: bold;">${card.title}</h3>
                   <p style="margin: 0; font-size: 13px; line-height: 1.4;">${card.description}</p>
                 </div>
