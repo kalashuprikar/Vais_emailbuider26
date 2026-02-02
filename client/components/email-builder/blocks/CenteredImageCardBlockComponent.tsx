@@ -566,7 +566,7 @@ export const CenteredImageCardBlockComponent: React.FC<
                         style={{
                           border:
                             hoveredSection === `title-${title.id}`
-                              ? "1px dashed rgb(255, 106, 0)"
+                              ? "2px dotted rgb(255, 106, 0)"
                               : "none",
                         }}
                       >
