@@ -695,7 +695,7 @@ export const CenteredImageCardBlockComponent: React.FC<
                           style={{
                             border:
                               hoveredSection === `button-${btn.id}`
-                                ? "1px dashed white"
+                                ? "2px dotted white"
                                 : "none",
                           }}
                         >
