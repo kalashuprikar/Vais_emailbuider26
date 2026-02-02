@@ -211,7 +211,7 @@ export const TwoColumnCardBlockComponent: React.FC<
               backgroundColor: card.backgroundColor,
               margin: `${card.margin}px`,
               borderRadius: `${card.borderRadius}px`,
-              minHeight: "400px",
+              height: "400px",
             }}
             onMouseEnter={() => setHoveredCardId(card.id)}
             onMouseLeave={() => setHoveredCardId(null)}
