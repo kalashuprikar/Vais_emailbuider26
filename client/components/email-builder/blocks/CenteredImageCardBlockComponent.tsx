@@ -748,10 +748,7 @@ export const CenteredImageCardBlockComponent: React.FC<
                             onClick={() => setEditMode(`button-text-${btn.id}`)}
                             className="inline-block py-2 px-6 bg-valasys-orange text-white rounded text-sm font-bold hover:bg-orange-600 cursor-pointer transition-all"
                             style={{
-                              border:
-                                hoveredSection === `button-${btn.id}`
-                                  ? "2px dotted white"
-                                  : "none",
+                              border: "2px dotted white",
                             }}
                           >
                             {btn.text}
