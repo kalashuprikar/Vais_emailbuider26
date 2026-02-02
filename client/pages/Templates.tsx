@@ -178,7 +178,7 @@ export default function Templates() {
                       </div>
                     </CardHeader>
                     <CardContent className="flex-1 flex flex-col">
-                      <div className="flex-1 mb-4">
+                      <div className="mb-3">
                         <Badge variant="outline" className="bg-blue-50">
                           {template.blocks.length} blocks
                         </Badge>
@@ -186,7 +186,7 @@ export default function Templates() {
                       <div className="text-xs text-gray-400 mb-4">
                         Updated: {formatDate(template.updatedAt)}
                       </div>
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 mt-auto">
                         <Button
                           variant="outline"
                           size="sm"
