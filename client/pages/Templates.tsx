@@ -163,30 +163,30 @@ export default function Templates() {
                 {filteredTemplates.map((template) => (
                   <Card
                     key={template.id}
-                    className="hover:shadow-lg transition-shadow"
+                    className="flex flex-col hover:shadow-lg transition-shadow min-h-64"
                   >
-                    <CardHeader className="pb-2 pt-4">
+                    <CardHeader className="pb-3">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <CardTitle className="text-base truncate">
+                          <CardTitle className="text-lg truncate">
                             {template.name}
                           </CardTitle>
                         </div>
                       </div>
-                      <div className="text-xs text-gray-600 mt-1 font-medium truncate">
+                      <div className="text-sm text-gray-600 mt-2 font-medium truncate">
                         Subject: {template.subject}
                       </div>
                     </CardHeader>
-                    <CardContent className="pt-0 pb-4">
-                      <div className="mb-2">
-                        <Badge variant="outline" className="bg-blue-50 text-xs">
+                    <CardContent className="flex-1 flex flex-col">
+                      <div className="flex-1 mb-4">
+                        <Badge variant="outline" className="bg-blue-50">
                           {template.blocks.length} blocks
                         </Badge>
                       </div>
-                      <div className="text-xs text-gray-400 mb-3 flex-1">
+                      <div className="text-xs text-gray-400 mb-4">
                         Updated: {formatDate(template.updatedAt)}
                       </div>
-                      <div className="flex gap-2 mt-2">
+                      <div className="flex gap-2">
                         <Button
                           variant="outline"
                           size="sm"
