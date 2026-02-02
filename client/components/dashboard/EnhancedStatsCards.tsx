@@ -108,7 +108,7 @@ export default function EnhancedStatsCards({
         return (
           <Card
             key={index}
-            className="hover:shadow-lg transition-all duration-200 group"
+            className="hover:shadow-lg transition-all duration-200 group flex flex-col content-section-hover"
           >
             <CardContent className="p-6">
               <div className="flex items-start justify-between mb-4">
