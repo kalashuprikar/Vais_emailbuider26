@@ -911,7 +911,7 @@ export function renderBlockToHTML(block: ContentBlock): string {
           let imageHtml = "";
           const contentPadding = Math.max(12, card.padding || 16);
           if (card.image) {
-            const imageTag = `<img src="${card.image}" alt="${card.imageAlt || ""}" style="width: 100%; height: auto; display: block; border-radius: ${card.borderRadius}px; object-fit: cover; border: none; cursor: pointer;" />`;
+            const imageTag = `<img src="${card.image}" alt="${card.imageAlt || ""}" style="width: 100%; height: 100%; display: block; border-radius: ${card.borderRadius}px; object-fit: cover; border: none; cursor: pointer;" />`;
             if (card.imageLink) {
               let href = card.imageLink;
               if (card.imageLinkType === "email") {
@@ -925,13 +925,13 @@ export function renderBlockToHTML(block: ContentBlock): string {
                 card.imageLinkType === "email"
                   ? ""
                   : ` target="_blank" rel="noopener noreferrer"`;
-              imageHtml = `<div style="padding: 12px;">
-                  <a href="${href}"${target} style="text-decoration: none; display: block; width: 100%;">
+              imageHtml = `<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                  <a href="${href}"${target} style="text-decoration: none; display: block; width: 100%; height: 100%;">
                     ${imageTag}
                   </a>
                 </div>`;
             } else {
-              imageHtml = `<div style="padding: 12px;">
+              imageHtml = `<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
                   ${imageTag}
                 </div>`;
             }
