@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Trash2, X } from "lucide-react";
+import { Trash2, X, Copy, Plus } from "lucide-react";
 import { SocialLinksEditor } from "./SocialLinksEditor";
 import { FooterSocialLinksEditor } from "./FooterSocialLinksEditor";
 import { generateId } from "./utils";
