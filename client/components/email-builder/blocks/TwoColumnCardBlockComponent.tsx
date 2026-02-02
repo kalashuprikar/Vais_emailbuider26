@@ -138,10 +138,16 @@ export const TwoColumnCardBlockComponent: React.FC<
     onUpdate({ ...block, cards: updatedCards });
   };
 
-  const AddCardButton = ({
+  const FieldToolbar = ({
     cardId,
+    fieldName,
+    fieldValue,
+    onDelete,
   }: {
     cardId: string;
+    fieldName: "title" | "description";
+    fieldValue: string;
+    onDelete: (cardId: string, fieldName: "title" | "description") => void;
   }) => {
     return (
       <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-2 shadow-sm mt-2">
@@ -157,27 +163,11 @@ export const TwoColumnCardBlockComponent: React.FC<
         >
           <Plus className="w-3 h-3 text-gray-700" />
         </Button>
-      </div>
-    );
-  };
 
-  const FieldActions = ({
-    cardId,
-    fieldName,
-    fieldValue,
-    onDelete,
-  }: {
-    cardId: string;
-    fieldName: "title" | "description";
-    fieldValue: string;
-    onDelete: (cardId: string, fieldName: "title" | "description") => void;
-  }) => {
-    return (
-      <div className="flex items-center gap-2 mt-2">
         <Button
           variant="ghost"
           size="sm"
-          className="h-6 w-6 p-0 hover:bg-gray-100"
+          className="h-7 w-7 p-0 hover:bg-gray-100"
           title="Copy"
           onClick={(e) => {
             e.stopPropagation();
@@ -190,7 +180,7 @@ export const TwoColumnCardBlockComponent: React.FC<
         <Button
           variant="ghost"
           size="sm"
-          className="h-6 w-6 p-0 hover:bg-red-100"
+          className="h-7 w-7 p-0 hover:bg-red-100"
           title="Delete"
           onClick={(e) => {
             e.stopPropagation();
