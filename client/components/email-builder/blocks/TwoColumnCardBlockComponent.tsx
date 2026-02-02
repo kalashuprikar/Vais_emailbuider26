@@ -187,6 +187,7 @@ export const TwoColumnCardBlockComponent: React.FC<
       card.id === cardId ? { ...card, [fieldName]: "" } : card,
     );
     onUpdate({ ...block, cards: updatedCards });
+    setFocusedField(null);
   };
 
   const FieldToolbar = ({
