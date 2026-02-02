@@ -163,7 +163,7 @@ export default function Templates() {
                 {filteredTemplates.map((template) => (
                   <Card
                     key={template.id}
-                    className="flex flex-col hover:shadow-lg transition-shadow"
+                    className="flex flex-col hover:shadow-lg transition-shadow min-h-64"
                   >
                     <CardHeader className="pb-3">
                       <div className="flex items-start justify-between">
