@@ -5863,6 +5863,50 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
           onBlockUpdate({ ...twoColBlock, cards: updatedCards });
         };
 
+        const handleDuplicateCard = () => {
+          if (!selectedCard) return;
+          const duplicatedCard = {
+            ...JSON.parse(JSON.stringify(selectedCard)),
+            id: generateId(),
+          };
+          const newCards = [...twoColBlock.cards, duplicatedCard];
+          onBlockUpdate({ ...twoColBlock, cards: newCards });
+          setSelectedCardId(duplicatedCard.id);
+        };
+
+        const handleAddCard = () => {
+          const newCard = {
+            id: generateId(),
+            title: "Card Title",
+            description: "Add your card description here",
+            image: "",
+            imageAlt: "",
+            imageWidth: undefined,
+            imageHeight: undefined,
+            imageLink: "",
+            imageLinkType: "url" as const,
+            backgroundColor: "#333333",
+            textColor: "#ffffff",
+            borderRadius: 8,
+            padding: 16,
+            margin: 8,
+          };
+          const newCards = [...twoColBlock.cards, newCard];
+          onBlockUpdate({ ...twoColBlock, cards: newCards });
+          setSelectedCardId(newCard.id);
+        };
+
+        const handleDeleteCard = () => {
+          if (!selectedCard) return;
+          const newCards = twoColBlock.cards.filter(
+            (card: any) => card.id !== selectedCardId,
+          );
+          if (newCards.length > 0) {
+            setSelectedCardId(newCards[0].id);
+          }
+          onBlockUpdate({ ...twoColBlock, cards: newCards });
+        };
+
         return (
           <div className="space-y-5">
             <div>
