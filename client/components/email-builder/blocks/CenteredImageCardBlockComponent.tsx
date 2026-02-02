@@ -261,21 +261,7 @@ export const CenteredImageCardBlockComponent: React.FC<
       onBlockUpdate({ ...block, descriptions: newDescriptions });
 
       // Copy to clipboard
-      const success = await copyToClipboard(descToDuplicate.content);
-      if (success) {
-        toast({
-          title: "Copied!",
-          description: "Description copied to clipboard",
-          duration: 2000,
-        });
-      } else {
-        toast({
-          title: "Copy Failed",
-          description: "Could not copy to clipboard",
-          variant: "destructive",
-          duration: 2000,
-        });
-      }
+      await copyToClipboard(descToDuplicate.content);
     }
   };
 
