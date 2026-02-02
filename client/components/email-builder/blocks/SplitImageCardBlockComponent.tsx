@@ -726,9 +726,9 @@ export const SplitImageCardBlockComponent: React.FC<
               )}
 
               {/* Buttons Section */}
-              {buttons.length > 0 && (
+              {buttons.filter(b => b.text).length > 0 && (
                 <div className="space-y-2">
-                  {buttons.map((btn, idx) => (
+                  {buttons.filter(b => b.text).map((btn, idx) => (
                     <div key={btn.id}>
                       {editMode === `button-text-${btn.id}` ? (
                         <>
