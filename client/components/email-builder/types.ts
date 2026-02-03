@@ -421,8 +421,10 @@ export interface TwoColumnCardBlock {
     imageHeight?: number;
     imageLink?: string;
     imageLinkType?: "url" | "page" | "email";
-    title: string;
-    description: string;
+    titles?: { id: string; content: string }[];
+    title?: string; // Legacy support
+    descriptions?: { id: string; content: string }[];
+    description?: string; // Legacy support
     backgroundColor: string;
     textColor: string;
     borderRadius: number;
