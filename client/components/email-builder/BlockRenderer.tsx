@@ -51,14 +51,10 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
   onDelete,
   blockIndex = 0,
 }) => {
-  const handleClick = () => {
-    onBlockSelect?.(block.id);
-  };
-
   switch (block.type) {
     case "title":
       return (
-        <div onClick={handleClick}>
+        <div>
           <TitleBlockComponent
             block={block}
             isSelected={isSelected}
@@ -71,7 +67,7 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
       );
     case "text":
       return (
-        <div onClick={handleClick}>
+        <div>
           <TextBlockComponent
             block={block}
             isSelected={isSelected}
@@ -87,7 +83,7 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
       );
     case "image":
       return (
-        <div onClick={handleClick}>
+        <div>
           <ImageBlockComponent
             block={block}
             isSelected={isSelected}
@@ -103,7 +99,7 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
       );
     case "video":
       return (
-        <div onClick={handleClick}>
+        <div>
           <VideoBlockComponent
             block={block}
             isSelected={isSelected}
@@ -113,13 +109,13 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
       );
     case "button":
       return (
-        <div onClick={handleClick}>
+        <div>
           <ButtonBlockComponent block={block} isSelected={isSelected} />
         </div>
       );
     case "dynamicContent":
       return (
-        <div onClick={handleClick}>
+        <div>
           <DynamicContentBlockComponent
             block={block}
             isSelected={isSelected}
@@ -131,7 +127,7 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
       );
     case "logo":
       return (
-        <div onClick={handleClick}>
+        <div>
           <LogoBlockComponent
             block={block}
             isSelected={isSelected}
@@ -141,13 +137,13 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
       );
     case "social":
       return (
-        <div onClick={handleClick}>
+        <div>
           <SocialBlockComponent block={block} isSelected={isSelected} />
         </div>
       );
     case "html":
       return (
-        <div onClick={handleClick}>
+        <div>
           <HtmlBlockComponent
             block={block}
             isSelected={isSelected}
@@ -157,25 +153,25 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
       );
     case "divider":
       return (
-        <div onClick={handleClick}>
+        <div>
           <DividerBlockComponent block={block} isSelected={isSelected} />
         </div>
       );
     case "product":
       return (
-        <div onClick={handleClick}>
+        <div>
           <ProductBlockComponent block={block} isSelected={isSelected} />
         </div>
       );
     case "navigation":
       return (
-        <div onClick={handleClick}>
+        <div>
           <NavigationBlockComponent block={block} isSelected={isSelected} />
         </div>
       );
     case "header":
       return (
-        <div onClick={handleClick}>
+        <div>
           <HeaderBlockComponent
             block={block}
             isSelected={isSelected}
@@ -185,7 +181,7 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
       );
     case "footer":
       return (
-        <div onClick={handleClick}>
+        <div>
           <FooterBlockComponent
             block={block}
             isSelected={isSelected}
@@ -195,7 +191,7 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
       );
     case "footer-with-social":
       return (
-        <div onClick={handleClick}>
+        <div>
           <FooterWithSocialBlockComponent
             block={block as any}
             isSelected={isSelected}
@@ -210,13 +206,13 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
       );
     case "spacer":
       return (
-        <div onClick={handleClick}>
+        <div>
           <SpacerBlockComponent block={block} isSelected={isSelected} />
         </div>
       );
     case "centeredImageCard":
       return (
-        <div onClick={handleClick}>
+        <div>
           <CenteredImageCardBlockComponent
             block={block as any}
             isSelected={isSelected}
@@ -227,7 +223,7 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
       );
     case "splitImageCard":
       return (
-        <div onClick={handleClick}>
+        <div>
           <SplitImageCardBlockComponent
             block={block as any}
             isSelected={isSelected}
@@ -238,7 +234,7 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
       );
     case "twoColumnCard":
       return (
-        <div onClick={handleClick}>
+        <div>
           <TwoColumnCardBlockComponent
             block={block as any}
             isSelected={isSelected}
@@ -248,7 +244,7 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
       );
     case "stats":
       return (
-        <div onClick={handleClick}>
+        <div>
           <StatsBlockComponent
             block={block as any}
             isSelected={isSelected}
@@ -258,7 +254,7 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
       );
     case "features":
       return (
-        <div onClick={handleClick}>
+        <div>
           <FeaturesBlockComponent
             block={block as any}
             isSelected={isSelected}

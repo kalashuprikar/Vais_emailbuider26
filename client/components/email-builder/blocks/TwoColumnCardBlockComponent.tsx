@@ -11,11 +11,14 @@ interface TwoColumnCardBlockComponentProps {
   block: TwoColumnCardBlock;
   isSelected: boolean;
   onUpdate: (block: TwoColumnCardBlock) => void;
+  onDuplicate?: (block: TwoColumnCardBlock, position: number) => void;
+  onDelete?: (blockId: string) => void;
+  blockIndex?: number;
 }
 
 export const TwoColumnCardBlockComponent: React.FC<
   TwoColumnCardBlockComponentProps
-> = ({ block, isSelected, onUpdate }) => {
+> = ({ block, isSelected, onUpdate, onDuplicate, onDelete, blockIndex = 0 }) => {
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
   const [hoveredFieldId, setHoveredFieldId] = useState<string | null>(null);
   const [focusedFieldId, setFocusedFieldId] = useState<string | null>(null);
@@ -183,6 +186,16 @@ export const TwoColumnCardBlockComponent: React.FC<
     onUpdate({ ...block, cards: updatedCards });
     setEditingFieldId(null);
     setEditingValue("");
+  };
+
+  const handleBlockDuplicate = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onDuplicate?.(block, blockIndex + 1);
+  };
+
+  const handleBlockDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onDelete?.(block.id);
   };
 
   const FieldToolbar = ({
